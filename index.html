@@ -1,0 +1,225 @@
+<div id="leme-painel-ept">
+  <!-- Busca -->
+  <div class="leme-search-row">
+    <input
+      type="search"
+      id="leme-search"
+      class="leme-search"
+      placeholder="Buscar por título, autor ou instituição..."
+      aria-label="Buscar referências"
+    />
+    <button type="button" id="leme-clear" class="leme-clear">Limpar filtros</button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="leme-filters">
+    <div class="leme-field">
+      <label for="leme-filter-grau">Grau</label>
+      <select id="leme-filter-grau" aria-label="Filtrar por grau">
+        <option value="">Todos os graus</option>
+      </select>
+    </div>
+    <div class="leme-field">
+      <label for="leme-filter-ano">Ano</label>
+      <select id="leme-filter-ano" aria-label="Filtrar por ano">
+        <option value="">Todos os anos</option>
+      </select>
+    </div>
+    <label class="leme-tag" for="leme-only-available" style="align-self:end;min-height:44px;cursor:pointer;">
+      <input type="checkbox" id="leme-only-available" style="margin:0 8px 0 0;" />
+      Apenas com texto disponível
+    </label>
+  </div>
+
+  <!-- Contador de Resultados -->
+  <div class="leme-toolbar">
+    <div id="leme-stats" class="leme-count" aria-live="polite">Carregando acervo...</div>
+  </div>
+
+  <!-- Grade de Cards -->
+  <div id="leme-grid" class="leme-results"></div>
+
+  <!-- Paginação -->
+  <nav id="leme-pagination" class="leme-pagination" aria-label="Paginação"></nav>
+</div>
+
+
+<script>
+(function () {
+  const DATA_URL = "https://raw.githubusercontent.com/regi-lpf/references-parser/refs/heads/main/referencias.json";
+  const ITEMS_PER_PAGE = 12;
+
+  let allData = [];
+  let filteredData = [];
+  let currentPage = 1;
+
+  const rootEl = document.getElementById("leme-painel-ept");
+  const gridEl = document.getElementById("leme-grid");
+  const statsEl = document.getElementById("leme-stats");
+  const pagEl = document.getElementById("leme-pagination");
+  const searchEl = document.getElementById("leme-search");
+  const grauEl = document.getElementById("leme-filter-grau");
+  const anoEl = document.getElementById("leme-filter-ano");
+  const onlyAvailEl = document.getElementById("leme-only-available");
+  const clearEl = document.getElementById("leme-clear");
+
+  function normalizeText(str) {
+    return (str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement("div");
+    div.textContent = str ?? "";
+    return div.innerHTML;
+  }
+
+  function buildLattesSearchUrl(autor) {
+    const query = encodeURIComponent(`site:lattes.cnpq.br "${autor}"`);
+    return `https://www.google.com/search?q=${query}`;
+  }
+
+  function populateFilters(data) {
+    const graus = [...new Set(data.map((d) => d.grau).filter(Boolean))].sort();
+    graus.forEach((g) => {
+      const opt = document.createElement("option");
+      opt.value = g;
+      opt.textContent = g;
+      grauEl.appendChild(opt);
+    });
+
+    const anos = [...new Set(data.map((d) => d.ano).filter(Boolean))].sort((a, b) => b - a);
+    anos.forEach((a) => {
+      const opt = document.createElement("option");
+      opt.value = a;
+      opt.textContent = a;
+      anoEl.appendChild(opt);
+    });
+  }
+
+  function applyFilters() {
+    const q = normalizeText(searchEl.value.trim());
+    const grau = grauEl.value;
+    const ano = anoEl.value;
+    const onlyAvail = onlyAvailEl.checked;
+
+    filteredData = allData.filter((item) => {
+      if (grau && item.grau !== grau) return false;
+      if (ano && String(item.ano) !== ano) return false;
+      if (onlyAvail && !item.url_publicacao) return false;
+      if (q) {
+        const haystack = normalizeText(`${item.titulo} ${item.autor} ${item.ies}`);
+        if (!haystack.includes(q)) return false;
+      }
+      return true;
+    });
+
+    currentPage = 1;
+    render();
+  }
+
+  function renderCards(items) {
+    if (!items.length) {
+      gridEl.innerHTML = `<div class="leme-empty"><p>Nenhuma referência encontrada para os filtros selecionados.</p></div>`;
+      return;
+    }
+
+    gridEl.innerHTML = items
+      .map((item) => {
+        const pubBtn = item.url_publicacao
+          ? `<a href="${escapeHtml(item.url_publicacao)}" target="_blank" rel="noopener noreferrer" class="leme-link produto">Acessar Texto</a>`
+          : `<span class="leme-badge pending" title="Link da publicação ainda não indexado">Texto Indisponível</span>`;
+
+        const lattesUrl = item.url_lattes || buildLattesSearchUrl(item.autor);
+        const lattesLabel = item.url_lattes ? "CV Lattes" : "Buscar Lattes";
+
+        return `
+          <article class="leme-card">
+            <div class="leme-badges">
+              <span class="leme-badge green">${escapeHtml(item.ano)}</span>
+              <span class="leme-badge">${escapeHtml(item.grau)}</span>
+            </div>
+            <h3 class="leme-card-title">${escapeHtml(item.titulo)}</h3>
+            <div class="leme-meta">
+              <div><b>Autor(a):</b> ${escapeHtml(item.autor)}</div>
+              <div><b>Instituição:</b> ${escapeHtml(item.ies)}</div>
+            </div>
+            <div class="leme-card-footer">
+              ${pubBtn}
+              <a href="${escapeHtml(lattesUrl)}" target="_blank" rel="noopener noreferrer" class="leme-link leme-export-btn">${lattesLabel}</a>
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  function renderPagination(totalPages) {
+    if (totalPages <= 1) {
+      pagEl.innerHTML = "";
+      return;
+    }
+
+    let html = `<button type="button" class="leme-page-btn" data-page="${currentPage - 1}" ${currentPage === 1 ? "disabled" : ""}>« Anterior</button>`;
+
+    const windowSize = 2;
+    for (let p = 1; p <= totalPages; p++) {
+      if (p === 1 || p === totalPages || (p >= currentPage - windowSize && p <= currentPage + windowSize)) {
+        html += `<button type="button" class="leme-page-btn ${p === currentPage ? "is-active" : ""}" data-page="${p}" ${p === currentPage ? 'aria-current="page"' : ""}>${p}</button>`;
+      } else if (p === currentPage - windowSize - 1 || p === currentPage + windowSize + 1) {
+        html += `<span class="leme-pagination-ellipsis">...</span>`;
+      }
+    }
+
+    html += `<button type="button" class="leme-page-btn" data-page="${currentPage + 1}" ${currentPage === totalPages ? "disabled" : ""}>Próxima »</button>`;
+    pagEl.innerHTML = html;
+  }
+
+  function render() {
+    const total = filteredData.length;
+    const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+    const start = (currentPage - 1) * ITEMS_PER_PAGE;
+    const slice = filteredData.slice(start, start + ITEMS_PER_PAGE);
+
+    statsEl.innerHTML = `Exibindo <strong>${slice.length}</strong> de <strong>${total}</strong> referências encontradas.`;
+    renderCards(slice);
+    renderPagination(totalPages);
+  }
+
+  pagEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-page]");
+    if (!btn || btn.disabled) return;
+    currentPage = Number(btn.dataset.page);
+    render();
+    rootEl.scrollIntoView({ behavior: "smooth" });
+  });
+
+  clearEl.addEventListener("click", () => {
+    searchEl.value = "";
+    grauEl.value = "";
+    anoEl.value = "";
+    onlyAvailEl.checked = false;
+    applyFilters();
+  });
+
+  [searchEl, grauEl, anoEl, onlyAvailEl].forEach((el) => {
+    el.addEventListener("input", applyFilters);
+    el.addEventListener("change", applyFilters);
+  });
+
+  fetch(DATA_URL)
+    .then((r) => {
+      if (!r.ok) throw new Error("Falha ao carregar JSON");
+      return r.json();
+    })
+    .then((data) => {
+      allData = data.sort((a, b) => (b.ano || 0) - (a.ano || 0) || a.titulo.localeCompare(b.titulo));
+      filteredData = [...allData];
+      populateFilters(allData);
+      render();
+    })
+    .catch((err) => {
+      console.error(err);
+      statsEl.textContent = "Erro ao carregar a base de referências.";
+    });
+})();
+</script>
