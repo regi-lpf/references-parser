@@ -96,6 +96,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0009",
+    "autor": "Marciléa Balbina Prenazzi de Almeida",
+    "autor_citacao": "ALMEIDA, Marciléa Balbina Prenazzi de",
+    "titulo": "A efetividade da contribuição escolar para a transformação sócioeconômica do aluno egresso",
+    "ano": 2011,
+    "data_defesa": "01/09/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_64807da2776af8b48366cf639367c1e5",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0010",
     "autor": "Mariana de Moura Nunes Almeida",
     "autor_citacao": "ALMEIDA, MARIANA DE MOURA NUNES",
@@ -396,6 +408,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0035",
+    "autor": "Keila Cristina Pinheiro Antunes",
+    "autor_citacao": "ANTUNES, KEILA CRISTINA PINHEIRO",
+    "titulo": "PROGRAMA DE ASSISTÊNCIA ESTUDANTIL E A SUA MATERIALIZAÇÃO NO INSTITUTO FEDERAL DE MATO GROSSO DO SUL: UMA PROPOSTA DE PRODUTO EDUCACIONAL VOLTADO AOS ESTUDANTES DO ENSINO MÉDIO INTEGRADO",
+    "ano": 2021,
+    "data_defesa": "23/02/2021",
+    "grau": "Mestrado Profissional",
+    "ies": "INSTITUTO FEDERAL DE EDUCAÇÃO CIÊNCIA E TECNOLOGIA DE MATO GROSSO DO SUL",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0036",
     "autor": "Carla Nogueira Patrao de Aquino",
     "autor_citacao": "AQUINO, CARLA NOGUEIRA PATRAO DE",
@@ -452,6 +476,18 @@
     "data_defesa": "13/08/2020",
     "grau": "Mestrado Profissional",
     "ies": "UNIVERSIDADE FEDERAL DE SÃO CARLOS",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/SCAR_65024d0178c84bcd277ed7c5c1653d60",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0041",
+    "autor": "José Oliveira Arapiraca",
+    "autor_citacao": "ARAPIRACA, JOSÉ  OLIVEIRA",
+    "titulo": "A USAID E A EDUCAÇÃO BRASILEIRA: um estudo a partir de uma abordagem crítica do capital humano",
+    "ano": 1979,
+    "data_defesa": "1979",
+    "grau": "Mestrado",
+    "ies": "Não especificada (ABNT)",
     "url_publicacao": null,
     "origem_url": "ausente"
   },
@@ -708,6 +744,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0066",
+    "autor": "Nelma Vilaça Paes Barreto",
+    "autor_citacao": "BARRETO, Nelma Vilaça Paes",
+    "titulo": "Limites e contribuições de núcleos de tecnologias e educação a distância na rede federal de educação tecnológica",
+    "ano": 2011,
+    "data_defesa": "01/01/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE ESTÁCIO DE SÁ",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0067",
     "autor": "Andre Matias Evaldt de Barros",
     "autor_citacao": "BARROS, ANDRE MATIAS EVALDT DE",
@@ -912,6 +960,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0084",
+    "autor": "Daniella de Souza Bezerra",
+    "autor_citacao": "BEZERRA, Daniella de Souza",
+    "titulo": "Políticas e planejamento do ensino médio (integrado ao técnico) e da língua estrangeira (inglês): na mira(gem) da politecnia e da integração",
+    "ano": 2012,
+    "data_defesa": "01/12/2012",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE DE SÃO PAULO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/USP_c5ad6d41d9c10f108fff07d402f0aaaa",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0085",
     "autor": "Dina Faustino Bezerra",
     "autor_citacao": "BEZERRA, DINA FAUSTINO",
@@ -1008,6 +1068,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0093",
+    "autor": "Dirnei Bonow",
+    "autor_citacao": "BONOW, Dirnei",
+    "titulo": "A EXCLUSÃO ESCOLAR NO PROEJA DO IF SUL-RIO-GRANDENSE: REPRESENTAÇÕES DE ESTUDANTES EVADIDOS",
+    "ano": 2010,
+    "data_defesa": "01/08/2010",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DE PELOTAS",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0094",
     "autor": "Caroline Duarte Lopes de Borborema",
     "autor_citacao": "BORBOREMA, CAROLINE DUARTE LOPES DE",
@@ -1017,6 +1089,18 @@
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE DO ESTADO DO RIO DE JANEIRO",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UERJ_7074fa659da00498ee5cc106f7b4c4a8",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0095",
+    "autor": "Aurélio Ferreira Borges",
+    "autor_citacao": "BORGES, Aurélio Ferreira",
+    "titulo": "GESTÃO AMBIENTAL NOS INSTITUTOS FEDERAIS DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA",
+    "ano": 2012,
+    "data_defesa": "01/02/2012",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE FEDERAL DE LAVRAS",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFLA_0fedf821e06b0e0813850350b822b3e0",
     "origem_url": "bdtd_api"
   },
   {
@@ -1044,6 +1128,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0098",
+    "autor": "Sirlei Bortolini",
+    "autor_citacao": "BORTOLINI, Sirlei",
+    "titulo": "Desafios e estratégias para tornar o IFRS - Câmpus Bento Gonçalves uma escola inclusiva",
+    "ano": 2012,
+    "data_defesa": "01/09/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_e3e1257228e89c35ea7de6fab8ee9678",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0099",
     "autor": "Fernanda Ferreira Boschini",
     "autor_citacao": "BOSCHINI, FERNANDA FERREIRA",
@@ -1054,6 +1150,18 @@
     "ies": "CENTRO ESTADUAL DE EDUCAÇÃO TECNOLÓGICA PAULA SOUZA",
     "url_publicacao": null,
     "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0100",
+    "autor": "Augiza Karla Boso",
+    "autor_citacao": "BOSO, Augiza Karla",
+    "titulo": "REPOSITÓRIOS DE INSTITUIÇÕES FEDERAIS DE ENSINO SUPERIOR E SUAS POLÍTICAS: análise sob o aspecto das fontes informacionais",
+    "ano": 2011,
+    "data_defesa": "01/08/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DE SANTA CATARINA",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFSC_95b9e7bf2e1f30299c02a5e78b55565f",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0101",
@@ -1174,6 +1282,18 @@
     "ies": "INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO RIO GRANDE DO SUL",
     "url_publicacao": null,
     "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0111",
+    "autor": "Daniela Gomes Martins Bueno",
+    "autor_citacao": "BUENO, Daniela Gomes Martins",
+    "titulo": "A Política de Criação dos Institutos Federais de Educação, Ciência e Tecnologia e a Conformação do Ensino Superior Nessas Instituições",
+    "ano": 2012,
+    "data_defesa": "01/07/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL FLUMINENSE",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFF-2_abd262fab1bb39da47136b3686caf9e4",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0112",
@@ -1352,6 +1472,18 @@
     "data_defesa": "24/08/2016",
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE ESTADUAL DO NORTE FLUMINENSE DARCY RIBEIRO",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0127",
+    "autor": "Ulysses Tavares Carneiro",
+    "autor_citacao": "CARNEIRO, Ulysses Tavares",
+    "titulo": "Politécnica no Instituto Federal de Educação, Ciência e Tecnologia Catarinense - Campos Sombrio",
+    "ano": 2010,
+    "data_defesa": "01/12/2010",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
     "url_publicacao": null,
     "origem_url": "ausente"
   },
@@ -1836,6 +1968,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0168",
+    "autor": "Aline Moraes da Costa",
+    "autor_citacao": "COSTA, Aline Moraes da",
+    "titulo": "Educação Profissional e interiorização: o caso de Volta Redonda como expressão do nacional",
+    "ano": 2011,
+    "data_defesa": "01/07/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE DO ESTADO DO RIO DE JANEIRO",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0169",
     "autor": "Bianca dos Santos Costa",
     "autor_citacao": "COSTA, BIANCA DOS SANTOS",
@@ -1872,6 +2016,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0172",
+    "autor": "Gerline Maciel a Costa",
+    "autor_citacao": "COSTA, Gerline Maciel A",
+    "titulo": "da. Núcleo de Atendimento aos Alunos com Necessidades Educacionais Especiais (NAPNE): ações para a inclusão em uma instituição de ensino profissional do Estado de Pernambuco",
+    "ano": 2011,
+    "data_defesa": "01/09/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DE ALAGOAS",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0173",
     "autor": "Lucia Helena Kmentt Costa",
     "autor_citacao": "COSTA, LUCIA HELENA KMENTT",
@@ -1905,6 +2061,18 @@
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_5a217cabea7a149a200ed4dc3689422d",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0176",
+    "autor": "Maria Adélia da Costa",
+    "autor_citacao": "COSTA, Maria Adélia da",
+    "titulo": "Políticas de Formação de Professores para a Educação Profissional e Tecnológica: Cenários Contemporâneos",
+    "ano": 2012,
+    "data_defesa": "01/12/2012",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE FEDERAL DE UBERLÂNDIA",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFU_a2a8f4fbb8c35c855d9ab0e973149456",
     "origem_url": "bdtd_api"
   },
   {
@@ -1956,6 +2124,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0181",
+    "autor": "Sebastião de Jesus Costa",
+    "autor_citacao": "COSTA, Sebastião de Jesus",
+    "titulo": "O ensino do cooperativismo no Instituto Federal de Educação, Ciência e Tecnologia do Maranhão Campus São Luiz - Maracanã",
+    "ano": 2011,
+    "data_defesa": "01/05/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_53bab6b6a70fce7e693907be609bc622",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0182",
     "autor": "Yany Duarte Costa",
     "autor_citacao": "COSTA, YANY DUARTE",
@@ -1965,6 +2145,18 @@
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_f997b5c09bc16d3a24f3141ad56e1914",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0183",
+    "autor": "Helena Luiza Oliveira Coura",
+    "autor_citacao": "COURA, Helena Luiza Oliveira",
+    "titulo": "A possível integração curricular no Instituto Federal de Educação Ciência e Tecnologia Baiano: análise do curso em agropecuária",
+    "ano": 2012,
+    "data_defesa": "01/12/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DA BAHIA",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFBA-2_a562fbaf9134cd4d2116fc731d9cbb36",
     "origem_url": "bdtd_api"
   },
   {
@@ -2024,6 +2216,18 @@
     "data_defesa": "13/06/2015",
     "grau": "Mestrado Profissional",
     "ies": "CENTRO UNIVERSITÁRIO ALVES FARIA",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0189",
+    "autor": "Daniela Costa Custódio",
+    "autor_citacao": "CUSTÓDIO, Daniela Costa",
+    "titulo": "O adolescente do Instituto Federal Goiano - Campus Urutaí e a influência do internato escolar no seu hábito de consumo alimentar",
+    "ano": 2011,
+    "data_defesa": "01/09/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
     "url_publicacao": null,
     "origem_url": "ausente"
   },
@@ -2106,6 +2310,18 @@
     "titulo": "Proposta de sistema de votação eletrônica auditável para instituições de ensino superior",
     "ano": 2016,
     "data_defesa": "11/08/2016",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FUMEC",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0197",
+    "autor": "Edna Mapa Domingos",
+    "autor_citacao": "DOMINGOS, Edna Mapa",
+    "titulo": "Criação dos Institutos Federais de Educação Tecnológica: um estudo com servidores sobre a implantação do processo de unificação e mudança organizacional no IFMG",
+    "ano": 2012,
+    "data_defesa": "01/11/2012",
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE FUMEC",
     "url_publicacao": null,
@@ -2388,6 +2604,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0222",
+    "autor": "André Elias Fidelis Feitosa",
+    "autor_citacao": "FEITOSA, André Elias Fidelis",
+    "titulo": "OS (RE)ARRANJOS DO ENSINO TÉCNICO AGRÍCOLA NO BRASIL",
+    "ano": 2012,
+    "data_defesa": "01/10/2012",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE FEDERAL FLUMINENSE",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0223",
     "autor": "Jair Freitas Feitosa",
     "autor_citacao": "FEITOSA, JAIR FREITAS",
@@ -2580,6 +2808,18 @@
     "origem_url": "link_direto_existente"
   },
   {
+    "id": "ref_0239",
+    "autor": "Amilton de Moura Figueiredo",
+    "autor_citacao": "FIGUEIREDO, Amilton de Moura",
+    "titulo": "INSTITUTOS FEDERAIS DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA: Contexto de influência, produção do texto e tensões, na construção da política pública, relativa ao processo de criação dos Institutos Federais",
+    "ano": 2019,
+    "data_defesa": "26/08/2019",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE DO VALE DO RIO DOS SINOS",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/USIN_eca6f81ddb416b55050e3464e5cb1b7d",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0240",
     "autor": "Gabriela Matos Miranda de Figueiredo",
     "autor_citacao": "FIGUEIREDO, GABRIELA MATOS MIRANDA DE",
@@ -2590,6 +2830,18 @@
     "ies": "UNIVERSIDADE FEDERAL DA BAHIA",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFBA-2_f52d715f18363d855afddbdf2f55d4a6",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0241",
+    "autor": "Pedro Issa Figueiredo",
+    "autor_citacao": "FIGUEIREDO, Pedro Issa",
+    "titulo": "Análise da lógica estratégica da expansão da Rede dos Institutos Federais de Educação, Ciência e Tecnologia no Estado da Bahia, no período de 2008 a 2012",
+    "ano": 2013,
+    "data_defesa": "03/10/2013",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE SALVADOR",
+    "url_publicacao": null,
+    "origem_url": "ausente"
   },
   {
     "id": "ref_0242",
@@ -2648,6 +2900,18 @@
     "data_defesa": "06/04/2021",
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE TUIUTI DO PARANÁ",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0247",
+    "autor": "João Pereira da Silva Filho",
+    "autor_citacao": "FILHO, João Pereira da Silva",
+    "titulo": "Eleição de diretores em dois campi agrícolas do Instituto Federal de Educação, Ciência e Tecnologia de Pernambuco: os reflexos no cotidiano escolar",
+    "ano": 2010,
+    "data_defesa": "01/07/2010",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
     "url_publicacao": null,
     "origem_url": "ausente"
   },
@@ -2877,6 +3141,18 @@
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE FEDERAL DO ESPÍRITO SANTO",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFES_df0c9fbb1f7cc71de86fd0047ab3a384",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0269",
+    "autor": "Juraci Tôrres Galindo",
+    "autor_citacao": "GALINDO, Juraci Tôrres",
+    "titulo": "Integração Curricular no PROEJA: a experiência do Instituto Federal de Pernambuco",
+    "ano": 2010,
+    "data_defesa": "01/07/2010",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_add34067ae492fe7c805a64232096984",
     "origem_url": "bdtd_api"
   },
   {
@@ -3120,6 +3396,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0291",
+    "autor": "Humberto Arruda Guimaraes",
+    "autor_citacao": "GUIMARAES, HUMBERTO ARRUDA",
+    "titulo": "AVALIAÇÃO DA QUALIDADE DOS SERVIÇOS PRESTADOS EM UMA INSTITUIÇÃO FEDERAL DE EDUCAÇÃO: um estudo através do uso da Escala Servqual",
+    "ano": 2016,
+    "data_defesa": "26/10/2016",
+    "grau": "Mestrado",
+    "ies": "FUNDAÇÃO INSTITUTO CAPIXABA DE PESQUISAS EM CONTABILIDADE, ECONOMIA E FINANÇAS",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0292",
     "autor": "Luciana Carlena Correia Velasco Guimaraes",
     "autor_citacao": "GUIMARAES, LUCIANA CARLENA CORREIA VELASCO",
@@ -3228,6 +3516,30 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0301",
+    "autor": "Sonia S Imhof",
+    "autor_citacao": "IMHOF, Sonia S",
+    "titulo": "Formação em cursos de ensino médio profissionalizante: perspectivas de continuidade dos estudos e inserção no mercado de trabalho",
+    "ano": 2016,
+    "data_defesa": "2016",
+    "grau": "Mestrado",
+    "ies": "Não especificada (ABNT)",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0302",
+    "autor": "Laura Olívia Oliveira Issy",
+    "autor_citacao": "ISSY, Laura Olívia Oliveira",
+    "titulo": "O processo de autoavaliação e suas implicações para a gestão do Instituto Federal Goiano - Câmpus Urutaí",
+    "ano": 2012,
+    "data_defesa": "01/07/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_a64d8d928b09e8f23b36d842d2b43fdf",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0303",
     "autor": "Anna Carolina Salgado Jardim",
     "autor_citacao": "JARDIM, ANNA CAROLINA SALGADO",
@@ -3252,6 +3564,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0305",
+    "autor": "Cristiane Cabral Johann",
+    "autor_citacao": "JOHANN, Cristiane Cabral",
+    "titulo": "Evasão escolar no Instituto Federal Sul-Rio-Grandense: um estudo de caso no Campus Passo Fundo",
+    "ano": 2012,
+    "data_defesa": "01/09/2012",
+    "grau": "Mestrado",
+    "ies": "Fundação Universidade de Passo Fundo",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UPF_0ebfcdfe5c436e742cd181d652e79046",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0306",
     "autor": "Josebeth Jones",
     "autor_citacao": "JONES, JOSEBETH",
@@ -3261,6 +3585,18 @@
     "grau": "Mestrado Profissional",
     "ies": "UNIVERSIDADE ESTADUAL PAULISTA JÚLIO DE MESQUITA FILHO (GUARATINGUETÁ)",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNSP_d727a8026da81557bd15632cec22e852",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0307",
+    "autor": "Ademar Bernardes Pereira Júnior",
+    "autor_citacao": "JÚNIOR, Ademar Bernardes Pereira",
+    "titulo": "Assistência Estudantil como Política Pública na Rede Federal de Educação Profissional: O Caso do Instituto Federal de Educação, Ciência e Tecnologia do Sul de Minas Gerais",
+    "ano": 2012,
+    "data_defesa": "01/07/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL FLUMINENSE",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFF-2_b1372edcb07a8292e15ceb4583d63b15",
     "origem_url": "bdtd_api"
   },
   {
@@ -3540,6 +3876,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0333",
+    "autor": "Juarez Nelson Alves de Lima",
+    "autor_citacao": "LIMA, Juarez Nelson Alves de",
+    "titulo": "Instituto Federal de Educação, Ciência e Tecnologia Catarinense: os desafios de sua implantação e qualificação/complementação do quadro docente",
+    "ano": 2010,
+    "data_defesa": "01/03/2010",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_1570bceb58237cb9300fcdbf54cdc99b",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0334",
     "autor": "Katia Valeria Alves de Lima",
     "autor_citacao": "LIMA, KATIA VALERIA ALVES DE",
@@ -3561,6 +3909,30 @@
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE DE SÃO PAULO",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/USP_31286f522fa09938a950614e34977d27",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0336",
+    "autor": "Mirian Pereira Lima",
+    "autor_citacao": "LIMA, Mirian Pereira",
+    "titulo": "O Instituto Federal de Pernambuco: a construção da identidade do Campus Recife",
+    "ano": 2011,
+    "data_defesa": "01/09/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DE ALAGOAS",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0337",
+    "autor": "Rodrigo da Costa Lima",
+    "autor_citacao": "LIMA, Rodrigo da Costa",
+    "titulo": "A reorganização curricular da educação profissional após o decreto n° 5154/2004 : um estudo sobre o Instituto Federal de Santa Catarina - Campus Araranguá",
+    "ano": 2012,
+    "data_defesa": "01/08/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRGS-2_ea2378d219b31e9fed87ddf0596fe7e1",
     "origem_url": "bdtd_api"
   },
   {
@@ -3669,6 +4041,18 @@
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE FEDERAL DE PELOTAS",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFPL_4f47a6446a784b8f3c477c746bc79130",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0348",
+    "autor": "Osmar Lottermann",
+    "autor_citacao": "LOTTERMANN, Osmar",
+    "titulo": "O CURRÍCULO INTEGRADO NA EDUCAÇÃO DE JOVENS E ADULTOS",
+    "ano": 2012,
+    "data_defesa": "01/04/2012",
+    "grau": "Mestrado",
+    "ies": "UNIV. REGIONAL DO NOROESTE DO ESTADO DO RIO GRANDE DO SUL",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNIJ_e2cb504aa62f58dfa24abd5780296f3b",
     "origem_url": "bdtd_api"
   },
   {
@@ -3801,6 +4185,18 @@
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE REGIONAL DE BLUMENAU",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/FURB_b1a2af0b13e7b210eed0b033428d24e7",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0363",
+    "autor": "Sandra Margon",
+    "autor_citacao": "MARGON, Sandra",
+    "titulo": "Acessibilidade e Inclusão escolar no Ensino Agrícola: um estudo de caso sobre as condições de acessibilidade física com foco no aluno com deficiência visual no Instituto Federal de Educação, Ciência e Tecnologia do Espírito Santo (IFES) - Câmpus Santa Teresa",
+    "ano": 2012,
+    "data_defesa": "01/04/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_55708bc58caa3930d2d7849a5038d2b0",
     "origem_url": "bdtd_api"
   },
   {
@@ -4248,6 +4644,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0401",
+    "autor": "Lucas Boeira Michels",
+    "autor_citacao": "MICHELS, Lucas Boeira",
+    "titulo": "VIOLÊNCIA SIMBÓLICA NO ENSINO TÉCNICO:UM ESTUDO DE CASO NO IF-SC CAMPUS ARARANGUÁ",
+    "ano": 2012,
+    "data_defesa": "01/03/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE DO EXTREMO SUL CATARINENSE",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0402",
     "autor": "Simone Aparecida Milliorin",
     "autor_citacao": "MILLIORIN, SIMONE APARECIDA",
@@ -4280,8 +4688,8 @@
     "data_defesa": "18/03/2021",
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE DE BRASÍLIA",
-    "url_publicacao": null,
-    "origem_url": "ausente"
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNB_84bbc434e12e0eefa909d4ad208e5194",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0406",
@@ -4292,6 +4700,18 @@
     "data_defesa": "21/11/2018",
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE DE SOROCABA",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0407",
+    "autor": "Lenise Vieira de Souza Montandon",
+    "autor_citacao": "MONTANDON, Lenise Vieira de Souza",
+    "titulo": "A ATIVIDADE DE TRABALHO DAS PEDAGOGAS NO CONTEXTO DO REORDENAMENTO DA REDE FEDERAL DE EDUCAÇÃO PROFISSIONAL E TECNOLÓGICA: O Caso do IFMG Campus Ouro Preto",
+    "ano": 2011,
+    "data_defesa": "01/03/2011",
+    "grau": "Profissionalizante",
+    "ies": "CENTRO UNIVERSITARIO UNA",
     "url_publicacao": null,
     "origem_url": "ausente"
   },
@@ -4380,6 +4800,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0415",
+    "autor": "Juliana Lopes Lelis de Morais",
+    "autor_citacao": "MORAIS, JULIANA LOPES LELIS DE",
+    "titulo": "POLÍTICA PÚBLICA ESPACIAL COMO UM HORIZONTE DE SUPERAÇÃO: A EDUCAÇÃO COMO AÇÃO TRANSFORMADORA DO ESPAÇO",
+    "ano": 2021,
+    "data_defesa": "13/08/2021",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE DE BRASÍLIA",
+    "url_publicacao": "https://repositorio.unb.br/handle/10482/42243",
+    "origem_url": "link_direto_existente"
+  },
+  {
     "id": "ref_0416",
     "autor": "Celiamar Costa Simões Moreira",
     "autor_citacao": "MOREIRA, CELIAMAR COSTA SIMÕES",
@@ -4438,6 +4870,18 @@
     "ies": "UNIVERSIDADE FEDERAL DE PERNAMBUCO",
     "url_publicacao": null,
     "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0421",
+    "autor": "Priscila Rezende Moreira",
+    "autor_citacao": "MOREIRA, Priscila Rezende",
+    "titulo": "Evasão escolar nos cursos técnicos do PROEJA na Rede Federal de Educação Profissional e Tecnológica de Minas Gerais",
+    "ano": 2012,
+    "data_defesa": "01/07/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DE MINAS GERAIS",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFMG_5a889095efdaeedfe566cb65928ee60f",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0422",
@@ -4533,6 +4977,18 @@
     "grau": "Mestrado Profissional",
     "ies": "UNIVERSIDADE FEDERAL DE SANTA MARIA",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFSM_ecbf72897cb4fed2de2bc10643cd49c2",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0430",
+    "autor": "Emanuel Alves Moura",
+    "autor_citacao": "MOURA, Emanuel Alves",
+    "titulo": "Inserção dos institutos federais e o desenvolvimento local: um estudo de caso em Laranjal do Jarí - AP",
+    "ano": 2010,
+    "data_defesa": "01/09/2010",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_3e23eb149b61bf5b3664886e2799b5f6",
     "origem_url": "bdtd_api"
   },
   {
@@ -4644,6 +5100,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0440",
+    "autor": "Douglas Alessandro Nava",
+    "autor_citacao": "NAVA, DOUGLAS ALESSANDRO",
+    "titulo": "TRANSPARÊNCIA COMO ELEMENTO DE PROMOÇÃO DA GESTÃO DE CONTRATOS TERCEIRIZADOS DOS INSTITUTOS FEDERAIS",
+    "ano": 2021,
+    "data_defesa": "31/03/2021",
+    "grau": "Mestrado Profissional",
+    "ies": "UNIVERSIDADE DO OESTE DE SANTA CATARINA",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0441",
     "autor": "Marianise Paranhos Pereira Nazario",
     "autor_citacao": "NAZARIO, MARIANISE PARANHOS PEREIRA",
@@ -4713,6 +5181,18 @@
     "grau": "Mestrado Profissional",
     "ies": "UNIVERSIDADE FEDERAL FLUMINENSE",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFF-2_c5fff4e7f61728693332029a95372b42",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0447",
+    "autor": "Joaquim Rufino Neto",
+    "autor_citacao": "NETO, Joaquim Rufino",
+    "titulo": "A missão institucional do campus Crato do IFCE: percepção da comunidade escolar sobre os avanços e desafios para desenvolver o ensino, a pesquisa e a extensão em um novo projeto de sociedade",
+    "ano": 2012,
+    "data_defesa": "01/10/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_182e4f9b60ceb17d760cd36fa02f16b4",
     "origem_url": "bdtd_api"
   },
   {
@@ -4884,6 +5364,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0462",
+    "autor": "Artur Gomes de Oliveira",
+    "autor_citacao": "OLIVEIRA, Artur Gomes de",
+    "titulo": "MARKETING EDUCACIONAL: UMA ANÁLISE DA RELAÇÃO ENTRE ORIENTAÇÃO PARA O MERCADO E DESEMPENHO EM INSTITUTOS FEDERAIS DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA",
+    "ano": 2010,
+    "data_defesa": "01/09/2010",
+    "grau": "Profissionalizante",
+    "ies": "Universidade Potiguar",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0463",
     "autor": "Artur Gomes de Oliveira",
     "autor_citacao": "OLIVEIRA, ARTUR GOMES DE",
@@ -4892,8 +5384,8 @@
     "data_defesa": "26/02/2015",
     "grau": "Doutorado",
     "ies": "UNIVERSIDADE DE FORTALEZA",
-    "url_publicacao": null,
-    "origem_url": "ausente"
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFOR_9ee66ec885a3b8a89a4da88d7cade319",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0464",
@@ -4906,6 +5398,18 @@
     "ies": "CENTRO FEDERAL DE EDUCAÇÃO TECNOLÓGICA DE MINAS GERAIS",
     "url_publicacao": null,
     "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0465",
+    "autor": "Denise Lima de Oliveira",
+    "autor_citacao": "OLIVEIRA, Denise Lima de",
+    "titulo": "Implementação do Curso Técnico em Gestão do Agronegócio no Estado do Tocantins: análise da realidade do Instituto Federal de Educação, Ciência e Tecnologia - Campus Palmas e implicações na formação discente",
+    "ano": 2012,
+    "data_defesa": "01/03/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_8cd620a11baf98de4999ddb1b4c2746b",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0466",
@@ -5112,6 +5616,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0483",
+    "autor": "Rodrigo Ribeiro de Oliveira",
+    "autor_citacao": "OLIVEIRA, Rodrigo Ribeiro de",
+    "titulo": "Uma Metodologia para Avaliação do Grau de Satisfação de Qualidade de Vida no Trabalho dos Professores de Educação Básica Técnica e Tecnológica dos Institutos Federais de Educação, Ciência e Tecnologia",
+    "ano": 2012,
+    "data_defesa": "01/09/2012",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE METODISTA DE PIRACICABA",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0484",
     "autor": "Rosilene Souza de Oliveira",
     "autor_citacao": "OLIVEIRA, ROSILENE SOUZA DE",
@@ -5133,6 +5649,18 @@
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE FEDERAL DO RIO GRANDE DO NORTE",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRN_45e3bc3b394ea3cec424b84ecc03ad91",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0486",
+    "autor": "Claudino Ortigara",
+    "autor_citacao": "ORTIGARA, Claudino",
+    "titulo": "Reformas educacionais no período Lula (2003-2010): implementação nas Instituições Federais de ensino profissional",
+    "ano": 2012,
+    "data_defesa": "01/10/2012",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE ESTADUAL DE CAMPINAS",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNICAMP-30_e6bc023238ee0ceb979e4c71b6e584ad",
     "origem_url": "bdtd_api"
   },
   {
@@ -5172,6 +5700,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0490",
+    "autor": "Liz Denize Carvalho Paiva",
+    "autor_citacao": "PAIVA, Liz Denize Carvalho",
+    "titulo": "A perspectiva da autoavaliação institucional e seus desafios no Instituto Federal de Educação, Ciência e Tecnologia do Rio de Janeiro",
+    "ano": 2012,
+    "data_defesa": "01/08/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_f60af9059a8f8175faad5eaec8bcdef7",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0491",
     "autor": "Liz Denize Carvalho Paiva",
     "autor_citacao": "PAIVA, LIZ DENIZE CARVALHO",
@@ -5208,6 +5748,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0494",
+    "autor": "Paulie Ceres Palasios",
+    "autor_citacao": "PALASIOS, Paulie Ceres",
+    "titulo": "A articulação educacional profissional e desenvolvimento socioeconômico pelo Instituto Federal Goiano - Campus Ceres: perspectiva e possibilidades",
+    "ano": 2012,
+    "data_defesa": "01/06/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0495",
     "autor": "Roberta Pasqualli",
     "autor_citacao": "PASQUALLI, ROBERTA",
@@ -5218,6 +5770,30 @@
     "ies": "UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRGS-2_966e00ed26a026f115847c090b0fc00b",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0496",
+    "autor": "Maria das Graças Serudos Passos",
+    "autor_citacao": "PASSOS, Maria das Graças Serudos",
+    "titulo": "Pedagogia da Alternância: caminho possível para a formação e valorização dos sujeitos sociais do campo e nos cursos do IFAM/ Campus Manaus Zona Leste",
+    "ano": 2012,
+    "data_defesa": "01/12/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_56fd91035ca4b1daf8a03169be300bd3",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0497",
+    "autor": "Nilza Gomes Correia Peneluc",
+    "autor_citacao": "PENELUC, Nilza Gomes Correia",
+    "titulo": "A TRANSFORMAÇÃO DAS ESCOLAS AGROTÉCNICAS FEDERAIS DA BAHIA EM INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA BAIANO: UMA ANÁLISE DO SEU MODELO DE GESTÃO",
+    "ano": 2012,
+    "data_defesa": "01/10/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE SALVADOR",
+    "url_publicacao": null,
+    "origem_url": "ausente"
   },
   {
     "id": "ref_0498",
@@ -5624,8 +6200,8 @@
     "data_defesa": "18/12/2019",
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
-    "url_publicacao": null,
-    "origem_url": "ausente"
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_5840c7d7ed56fa0ddd211ffd642005be",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0533",
@@ -5652,6 +6228,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0535",
+    "autor": "Viviane Silva Ramos",
+    "autor_citacao": "RAMOS, Viviane Silva",
+    "titulo": "Desenvolvimento Local e Território: uma reflexão sobre o papel dos Institutos Federais de Educação, Ciência e Tecnologia",
+    "ano": 2011,
+    "data_defesa": "01/03/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRRJ-1_b4ad1457cd9bd584e10b0c318daea91e",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0536",
     "autor": "Francisco Jose Casarim Rapchan",
     "autor_citacao": "RAPCHAN, FRANCISCO JOSE CASARIM",
@@ -5662,6 +6250,18 @@
     "ies": "INSTITUTO NACIONAL DA PROPRIEDADE INDUSTRIAL",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/IFES-2_7a04abaa4d9ab4a558268759f6549ba7",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0537",
+    "autor": "Júlia Gonçalves Rech",
+    "autor_citacao": "RECH, Júlia Gonçalves",
+    "titulo": "O CARÁTER HUMANITÁRIO DA FORMAÇÃO DOS SUJEITOS DA EDUCAÇÃO ESPECIAL NO IF-SC",
+    "ano": 2012,
+    "data_defesa": "01/08/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL DE SANTA CATARINA",
+    "url_publicacao": null,
+    "origem_url": "ausente"
   },
   {
     "id": "ref_0538",
@@ -5940,6 +6540,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0561",
+    "autor": "Chaiane de Medeiros Rosa",
+    "autor_citacao": "ROSA, CHAIANE DE MEDEIROS",
+    "titulo": "A REDE FEDERAL DE EDUCAÇÃO PROFISSIONAL, CIENTÍFICA E TECNOLÓGICA NO CONTEXTO DAS POLÍTICAS DE EDUCAÇÃO SUPERIOR: as particularidades do IF Goiano - Campus Urutaí",
+    "ano": 2016,
+    "data_defesa": "24/10/2016",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE ESTADUAL PAULISTA JÚLIO DE MESQUITA FILHO (ARARAQUARA)",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNSP_333426be68737fd0a8708e20e57977e8",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0562",
     "autor": "Karina Graziele Correa Rosa",
     "autor_citacao": "ROSA, KARINA GRAZIELE CORREA",
@@ -6034,6 +6646,18 @@
     "ies": "UNIVERSIDADE TUIUTI DO PARANÁ",
     "url_publicacao": "https://tede.utp.br/jspui/bitstream/tede/1589/2/O%20CONCEITO%20DE%20%20TECNOLOGIA.pdf",
     "origem_url": "link_direto_existente"
+  },
+  {
+    "id": "ref_0570",
+    "autor": "Francisco das Chagas Santana",
+    "autor_citacao": "SANTANA, FRANCISCO DAS CHAGAS",
+    "titulo": "A EXPANSÃO DO INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO PIAUÍ, DE 2008 A 2010: UM ESTUDO SOBRE A LOCALIDADE DOS CAMPI NO TERRITÓRIO PIAUIENSE",
+    "ano": 2013,
+    "data_defesa": "06/06/2013",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE ESTADUAL PAULISTA JÚLIO DE MESQUITA FILHO (RIO CLARO)",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNSP_deb757d1db2808597bdae8f531e9163d",
+    "origem_url": "bdtd_api"
   },
   {
     "id": "ref_0571",
@@ -6384,6 +7008,18 @@
     "origem_url": "link_direto_existente"
   },
   {
+    "id": "ref_0600",
+    "autor": "Girlei Schmitz",
+    "autor_citacao": "SCHMITZ, Girlei",
+    "titulo": "A implantação do Programa Nacional de Integração da educação profissional com a educação básica na modalidade de educação de jovens e adultos (PROEJA) no Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina: o caso do curso técnico de enfermagem - limites e possibilidades",
+    "ano": 2012,
+    "data_defesa": "01/06/2012",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE ESTADUAL DE CAMPINAS",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNICAMP-30_06feb6bc6c4351de0131a76b38845ee8",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0601",
     "autor": "Marcia Maria Brisch Schneider",
     "autor_citacao": "SCHNEIDER, MARCIA MARIA BRISCH",
@@ -6405,6 +7041,18 @@
     "grau": "Mestrado",
     "ies": "UNIVERSIDADE TECNOLÓGICA FEDERAL DO PARANÁ",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UTFPR-12_e027876ee77a5f756b3f25d963da1da5",
+    "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0603",
+    "autor": "Michele de Almeida Scmidt",
+    "autor_citacao": "SCMIDT, MICHELE DE ALMEIDA",
+    "titulo": "OS INSTITUTOS DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA: UM ESTUDO DA EXPANSÃO DA REDE FEDERAL DE EDUCAÇÃO PROFISSIONAL E TECNOLÓGICA",
+    "ano": 2010,
+    "data_defesa": "01/08/2010",
+    "grau": "Mestrado",
+    "ies": "Fundação Universidade de Passo Fundo",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UPF_9d76a769161919025a786e420dfcc967",
     "origem_url": "bdtd_api"
   },
   {
@@ -6466,6 +7114,18 @@
     "ies": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE SERGIPE",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFS-2_08f11b1e917002fa2dee8b07fba2b571",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0609",
+    "autor": "Adriena Casini da Silva",
+    "autor_citacao": "SILVA, ADRIENA CASINI DA",
+    "titulo": "É tudo ou nada? Caminhos da Expansão no Colégio Pedro II (Anos 2000): da tradição à inovação",
+    "ano": 2021,
+    "data_defesa": "19/02/2021",
+    "grau": "Doutorado",
+    "ies": "PONTIFÍCIA UNIVERSIDADE CATÓLICA DO RIO DE JANEIRO",
+    "url_publicacao": null,
+    "origem_url": "ausente"
   },
   {
     "id": "ref_0610",
@@ -6744,6 +7404,18 @@
     "origem_url": "bdtd_api"
   },
   {
+    "id": "ref_0633",
+    "autor": "Iraneide de Albuquerque Silva",
+    "autor_citacao": "SILVA, Iraneide de Albuquerque",
+    "titulo": "O Instituto Federal de Educação Ciências e Tecnologia de Mato Grosso: Memória e Representações Sociais",
+    "ano": 2010,
+    "data_defesa": "01/03/2010",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE DO ESTADO DO RIO DE JANEIRO",
+    "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UERJ_e2645a22e937f5198d59ff01b3a2034f",
+    "origem_url": "bdtd_api"
+  },
+  {
     "id": "ref_0634",
     "autor": "Jamile Delagnelo Fagundes da Silva",
     "autor_citacao": "SILVA, JAMILE DELAGNELO FAGUNDES DA",
@@ -6802,6 +7474,18 @@
     "ies": "UNIVERSIDADE FEDERAL DE PERNAMBUCO",
     "url_publicacao": null,
     "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0639",
+    "autor": "Laura Rodrigues da Silva",
+    "autor_citacao": "SILVA, LAURA RODRIGUES DA",
+    "titulo": "USO DE ANIMAÇÃO COMPUTACIONAL PARA PROMOÇÃO DO ENSINO MÉDIO INTEGRADO NOS INSTITUTOS FEDERAIS",
+    "ano": 2020,
+    "data_defesa": "10/12/2020",
+    "grau": "Mestrado Profissional",
+    "ies": "INSTITUTO FEDERAL DE EDUCAÇÃO CIÊNCIA E TECNOLOGIA DE MATO GROSSO",
+    "url_publicacao": null,
+    "origem_url": "rejeitada_homepage"
   },
   {
     "id": "ref_0640",
@@ -6872,6 +7556,18 @@
     "data_defesa": "26/07/2021",
     "grau": "Mestrado Profissional",
     "ies": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE SERGIPE",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
+    "id": "ref_0646",
+    "autor": "Márcio Luis Bastos da Silva",
+    "autor_citacao": "SILVA, Márcio Luis Bastos da",
+    "titulo": "Os novos desafios da educação profissional e tecnológica na Bahia após a implantação do IFET Baiano",
+    "ano": 2011,
+    "data_defesa": "01/08/2011",
+    "grau": "Mestrado",
+    "ies": "UNIVERSIDADE FEDERAL RURAL DO RIO DE JANEIRO",
     "url_publicacao": null,
     "origem_url": "ausente"
   },
@@ -7140,6 +7836,18 @@
     "origem_url": "ausente"
   },
   {
+    "id": "ref_0669",
+    "autor": "Thiala Carvalho de Melo Silveira",
+    "autor_citacao": "SILVEIRA, THIALA CARVALHO DE MELO",
+    "titulo": "COMPREENSÃO DOS ALUNOS SOBRE O QUE É ENSINO INTEGRADO: ESTUDO DE CASO NO INSTITUTO FEDERAL DE SERGIPE",
+    "ano": 2020,
+    "data_defesa": "21/02/2020",
+    "grau": "Mestrado Profissional",
+    "ies": "INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE SERGIPE",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0670",
     "autor": "Aldo Geraldo Simoes",
     "autor_citacao": "SIMOES, ALDO GERALDO",
@@ -7174,6 +7882,18 @@
     "ies": "UNIVERSIDADE ESTADUAL DO OESTE DO PARANA",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UNIOESTE-1_affd3185170fd7c446ba5c270981f2ff",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0673",
+    "autor": "Alexandre Gomes Soares",
+    "autor_citacao": "SOARES, Alexandre Gomes",
+    "titulo": "Presenças, silêncios e ausências sobre gênero e diversidade sexual no âmbito do currículo de dois cursos da educação profissional",
+    "ano": 2012,
+    "data_defesa": "01/02/2012",
+    "grau": "Mestrado",
+    "ies": "CENTRO FEDERAL DE EDUCAÇÃO TECN. DE MINAS GERAIS",
+    "url_publicacao": null,
+    "origem_url": "ausente"
   },
   {
     "id": "ref_0674",
@@ -7246,6 +7966,18 @@
     "ies": "UNIVERSIDADE FEDERAL DA BAHIA",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFBA-2_23808214039b6e1e6abab63d15dc5553",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0680",
+    "autor": "F Sobral",
+    "autor_citacao": "SOBRAL, F",
+    "titulo": "J. M. A formação do técnico em agropecuária no contexto da agricultura familiar no oeste catarinense",
+    "ano": 2005,
+    "data_defesa": "2005",
+    "grau": "Doutorado",
+    "ies": "Não especificada (ABNT)",
+    "url_publicacao": "http://repositorio.unicamp.br/bitstream/REPOSIP/253006/1/Sobral_FranciscoJoseMontorio_D.pdf",
+    "origem_url": "link_direto_existente"
   },
   {
     "id": "ref_0682",
@@ -7584,6 +8316,18 @@
     "origem_url": "rejeitada_homepage"
   },
   {
+    "id": "ref_0712",
+    "autor": "Moacir Gubert Tavares",
+    "autor_citacao": "TAVARES, Moacir Gubert",
+    "titulo": "A constituição e a implantação dos Institutos Federais no contexto da expansão do Ensino Superior no Brasil: o caso do IFC – Campus Rio do Sul",
+    "ano": 2014,
+    "data_defesa": "31/10/2014",
+    "grau": "Doutorado",
+    "ies": "UNIVERSIDADE ESTADUAL DE PONTA GROSSA",
+    "url_publicacao": null,
+    "origem_url": "ausente"
+  },
+  {
     "id": "ref_0713",
     "autor": "Cristina Barbara Martins Teixeira",
     "autor_citacao": "TEIXEIRA, CRISTINA BARBARA MARTINS",
@@ -7654,6 +8398,18 @@
     "ies": "UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL",
     "url_publicacao": "https://bdtd.ibict.br/vufind/Record/UFRGS-2_42ec34f18b981c09bd407988e793fdcd",
     "origem_url": "bdtd_api"
+  },
+  {
+    "id": "ref_0719",
+    "autor": "Andressa Torinelli",
+    "autor_citacao": "TORINELLI, ANDRESSA",
+    "titulo": "CONHECENDO OS PRINCÍPIOS E CONCEPÇÕES DOS INSTITUTOS FEDERAIS: A HISTÓRIA EM QUADRINHOS COMO INSTRUMENTO",
+    "ano": 2019,
+    "data_defesa": "26/03/2019",
+    "grau": "Mestrado Profissional",
+    "ies": "INSTITUTO FEDERAL DE EDUC., CIÊNCIA E TECNOLOGIA DO PARANÁ",
+    "url_publicacao": null,
+    "origem_url": "ausente"
   },
   {
     "id": "ref_0720",
