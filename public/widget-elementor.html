@@ -1,0 +1,740 @@
+<section
+      id="vitrine-bib"
+      data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json"
+      data-json-url-local="public/teses-dissertacoes.json"
+      data-titulo="Teses e Dissertações"
+      data-categoria-label="Grau"
+    >
+      <div class="vb-header">
+        <h2 id="vb-title" class="vb-title">Teses e Dissertações</h2>
+        <div class="vb-toolbar-actions">
+          <a id="vb-download-json" href="public/teses-dissertacoes.json" download class="vb-btn">Baixar JSON</a>
+          <button type="button" id="vb-download-csv" class="vb-btn">Baixar CSV</button>
+        </div>
+      </div>
+      <div class="vb-search-row">
+        <input type="search" id="vb-search" class="vb-search" placeholder="Buscar por título, autor ou instituição..." aria-label="Buscar referências">
+        <button type="button" id="vb-clear" class="vb-clear">Limpar filtros</button>
+      </div>
+      <div class="vb-filters">
+        <div class="vb-field">
+          <label id="vb-categoria-label" for="vb-filter-categoria">Grau</label>
+          <select id="vb-filter-categoria" aria-label="Filtrar por grau">
+            <option value="">Todos</option>
+          </select>
+        </div>
+        <div class="vb-field">
+          <label for="vb-filter-ano">Ano</label>
+          <select id="vb-filter-ano" aria-label="Filtrar por ano">
+            <option value="">Todos os anos</option>
+          </select>
+        </div>
+        <label class="vb-toggle" for="vb-only-available">
+          <input type="checkbox" id="vb-only-available">
+          <span>Apenas com texto disponível</span>
+        </label>
+      </div>
+      <div class="vb-toolbar">
+        <div id="vb-stats" class="vb-count" aria-live="polite">Carregando acervo...</div>
+      </div>
+      <div id="vb-live-feedback" class="vb-sr-only" aria-live="polite"></div>
+      <div id="vb-grid" class="vb-results"></div>
+      <nav id="vb-pagination" class="vb-pagination" aria-label="Paginação"></nav>
+<style>
+#vitrine-bib {
+  --vb-primary: #3b47e5;
+  --vb-secondary: #7b359c;
+  --vb-primary-soft: #f0f1ff;
+  --vb-green: #1f7a49;
+  --vb-green-soft: #e9f8ef;
+  --vb-green-text: #166534;
+  --vb-card: #ffffff;
+  --vb-bg: #f7f8ff;
+  --vb-border: #e4e6f4;
+  --vb-border-strong: #c2c8ff;
+  --vb-text: #111827;
+  --vb-muted: #526075;
+  --vb-shadow-soft: 0 4px 14px rgba(15, 23, 42, 0.05);
+  font-family: "Open Sans", "Segoe UI", Arial, sans-serif;
+  color: var(--vb-text);
+  background: radial-gradient(circle at top left, rgba(59, 71, 229, 0.10), transparent 34%), radial-gradient(circle at top right, rgba(123, 53, 156, 0.09), transparent 30%), linear-gradient(180deg, #ffffff, var(--vb-bg));
+  border: 1px solid var(--vb-border);
+  border-radius: 24px;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: clip;
+  scroll-behavior: smooth;
+  text-align: left;
+}
+#vitrine-bib * {
+  box-sizing: border-box;
+}
+#vitrine-bib button,
+#vitrine-bib input,
+#vitrine-bib select {
+  font-family: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+}
+#vitrine-bib h2,
+#vitrine-bib h3,
+#vitrine-bib p {
+  text-transform: none;
+}
+#vitrine-bib :focus-visible {
+  outline: 3px solid rgba(59, 71, 229, 0.45);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+#vitrine-bib .vb-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+#vitrine-bib .vb-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--vb-text);
+  line-height: 1.25;
+}
+#vitrine-bib .vb-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#vitrine-bib .vb-btn,
+#vitrine-bib .vb-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--vb-border-strong);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--vb-primary);
+  padding: 9px 14px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+  min-height: 40px;
+  margin: 0;
+  text-decoration: none !important;
+  box-shadow: none;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+#vitrine-bib .vb-btn:hover:not(:disabled),
+#vitrine-bib .vb-page-btn:hover:not(:disabled) {
+  background: var(--vb-primary-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(59, 71, 229, 0.12);
+}
+#vitrine-bib .vb-btn.is-primary {
+  background: var(--vb-green);
+  border-color: var(--vb-green);
+  color: #ffffff !important;
+}
+#vitrine-bib .vb-btn.is-primary:hover:not(:disabled) {
+  background: #176039;
+  color: #ffffff !important;
+}
+#vitrine-bib .vb-btn.is-copied {
+  background: var(--vb-green-soft);
+  border-color: #86efac;
+  color: var(--vb-green-text);
+}
+#vitrine-bib .vb-page-btn.is-active {
+  background: var(--vb-primary);
+  color: #ffffff;
+  border-color: var(--vb-primary);
+}
+#vitrine-bib .vb-page-btn.is-active:hover:not(:disabled) {
+  background: #2f3bd4;
+  color: #ffffff;
+}
+#vitrine-bib .vb-btn:disabled,
+#vitrine-bib .vb-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+#vitrine-bib .vb-search-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  margin: 12px 0;
+}
+#vitrine-bib .vb-search {
+  width: 100%;
+  border: 1px solid var(--vb-border-strong);
+  border-radius: 16px;
+  padding: 12px 16px;
+  font-size: 15px;
+  line-height: 1.35;
+  color: var(--vb-text);
+  outline: none;
+  background: #ffffff;
+  min-height: 46px;
+  margin: 0;
+}
+#vitrine-bib .vb-search:focus {
+  border-color: var(--vb-primary);
+  box-shadow: 0 0 0 4px rgba(59, 71, 229, 0.14);
+}
+#vitrine-bib .vb-clear {
+  border: none;
+  border-radius: 16px;
+  padding: 0 18px;
+  min-height: 46px;
+  margin: 0;
+  background: linear-gradient(135deg, var(--vb-primary), var(--vb-secondary));
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(59, 71, 229, 0.16);
+}
+#vitrine-bib .vb-filters {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  align-items: end;
+}
+#vitrine-bib .vb-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--vb-muted);
+  margin: 0 0 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+#vitrine-bib .vb-field select {
+  width: 100%;
+  border: 1px solid var(--vb-border-strong);
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: #ffffff;
+  color: var(--vb-text);
+  font-size: 13px;
+  line-height: 1.3;
+  outline: none;
+  min-height: 44px;
+  margin: 0;
+}
+#vitrine-bib .vb-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #f8fafc;
+  border: 1px solid #dbe3ee;
+  color: #334155;
+  cursor: pointer;
+}
+#vitrine-bib .vb-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+#vitrine-bib .vb-count {
+  font-size: 14px;
+  color: var(--vb-muted);
+  font-weight: 700;
+}
+#vitrine-bib .vb-count strong {
+  color: var(--vb-primary);
+}
+#vitrine-bib .vb-results {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  align-items: stretch;
+  grid-auto-rows: 1fr;
+}
+#vitrine-bib .vb-card {
+  min-height: 280px;
+  height: 100%;
+  background: var(--vb-card);
+  border: 1px solid var(--vb-border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--vb-shadow-soft);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+#vitrine-bib .vb-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.09);
+  border-color: rgba(59, 71, 229, 0.38);
+}
+#vitrine-bib .vb-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 10px;
+}
+#vitrine-bib .vb-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  background: var(--vb-primary-soft);
+  color: var(--vb-primary);
+  border: 1px solid #cfd6ff;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#vitrine-bib .vb-badge.green {
+  background: var(--vb-green-soft);
+  color: var(--vb-green-text);
+  border-color: #bbf7d0;
+}
+#vitrine-bib .vb-badge.pending {
+  background: #f1f5f9;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+#vitrine-bib .vb-card-title {
+  margin: 0 0 12px;
+  color: var(--vb-primary);
+  font-size: 16px;
+  line-height: 1.35;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+#vitrine-bib .vb-meta {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 14px;
+  color: var(--vb-muted);
+  font-size: 13px;
+  line-height: 1.38;
+}
+#vitrine-bib .vb-meta b {
+  color: var(--vb-text);
+}
+#vitrine-bib .vb-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--vb-border);
+}
+#vitrine-bib .vb-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#vitrine-bib .vb-empty {
+  grid-column: 1 / -1;
+  background: #ffffff;
+  border: 1px dashed var(--vb-border-strong);
+  border-radius: 20px;
+  padding: 32px;
+  text-align: center;
+  color: var(--vb-muted);
+  font-weight: 700;
+}
+#vitrine-bib .vb-empty p {
+  margin: 0 0 14px;
+}
+#vitrine-bib .vb-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin: 20px 0 4px;
+}
+#vitrine-bib .vb-pagination-ellipsis {
+  color: var(--vb-muted);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 4px;
+}
+#vitrine-bib .vb-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+@media (max-width: 1024px) {
+  #vitrine-bib .vb-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #vitrine-bib .vb-results {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 720px) {
+  #vitrine-bib {
+    padding: 16px;
+    border-radius: 18px;
+  }
+  #vitrine-bib .vb-search-row,
+  #vitrine-bib .vb-filters {
+    grid-template-columns: 1fr;
+  }
+  #vitrine-bib .vb-results {
+    grid-auto-rows: auto;
+  }
+  #vitrine-bib .vb-card {
+    min-height: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #vitrine-bib,
+  #vitrine-bib * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+<script>
+(function () {
+  const ITEMS_PER_PAGE = 12;
+  const HTML_ESCAPE_MAP = {
+    "\u0026": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  };
+  function escapeHtml(value) {
+    return String(value == null ? "" : value).replace(/[\u0026<>"']/g, function (ch) {
+      return HTML_ESCAPE_MAP[ch];
+    });
+  }
+  function normalizeText(str) {
+    return String(str || "")
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+  function safeUrl(url) {
+    if (!url) return null;
+    const trimmed = String(url).trim();
+    if (/^https?:\/\//i.test(trimmed)) return trimmed;
+    return null;
+  }
+  function isLocalEnvironment() {
+    const host = (window.location && window.location.hostname) || "";
+    const proto = (window.location && window.location.protocol) || "";
+    return host === "localhost" || host === "127.0.0.1" || host === "::1" || proto === "file:";
+  }
+  function resolveDataUrl(rootEl) {
+    const localUrl = rootEl.getAttribute("data-json-url-local");
+    const prodUrl = rootEl.getAttribute("data-json-url");
+    if (isLocalEnvironment() && localUrl) return localUrl;
+    return prodUrl || localUrl || "";
+  }
+  function escapeCsvCell(val) {
+    return "\"" + String(val == null ? "" : val).replace(/"/g, "\"\"") + "\"";
+  }
+  function initVitrine(rootEl) {
+    if (!rootEl || rootEl.dataset.vbMounted === "1") return;
+    rootEl.dataset.vbMounted = "1";
+    const titleEl = rootEl.querySelector("#vb-title");
+    const catLabelEl = rootEl.querySelector("#vb-categoria-label");
+    const searchEl = rootEl.querySelector("#vb-search");
+    const catEl = rootEl.querySelector("#vb-filter-categoria");
+    const anoEl = rootEl.querySelector("#vb-filter-ano");
+    const onlyAvailEl = rootEl.querySelector("#vb-only-available");
+    const clearEl = rootEl.querySelector("#vb-clear");
+    const statsEl = rootEl.querySelector("#vb-stats");
+    const gridEl = rootEl.querySelector("#vb-grid");
+    const pagEl = rootEl.querySelector("#vb-pagination");
+    const downloadJsonEl = rootEl.querySelector("#vb-download-json");
+    const downloadCsvEl = rootEl.querySelector("#vb-download-csv");
+    const liveEl = rootEl.querySelector("#vb-live-feedback");
+    if (!gridEl || !statsEl || !searchEl || !catEl || !anoEl) return;
+    let allData = [];
+    let filteredData = [];
+    let currentPage = 1;
+    let debounceTimer = null;
+    let rawPayload = null;
+    function syncHeaderConfig() {
+      const titulo = rootEl.getAttribute("data-titulo") || "Acervo Bibliográfico";
+      const catLabel = rootEl.getAttribute("data-categoria-label") || "Categoria";
+      if (titleEl) titleEl.textContent = titulo;
+      if (catLabelEl) catLabelEl.textContent = catLabel;
+      catEl.setAttribute("aria-label", "Filtrar por " + catLabel.toLowerCase());
+      const jsonUrl = resolveDataUrl(rootEl);
+      if (downloadJsonEl && jsonUrl) {
+        downloadJsonEl.setAttribute("href", jsonUrl);
+      }
+      return jsonUrl;
+    }
+    function announce(msg) {
+      if (liveEl) liveEl.textContent = msg;
+    }
+    function populateFilters(items) {
+      const catLabel = rootEl.getAttribute("data-categoria-label") || "Categoria";
+      catEl.innerHTML = "<option value=\"\">Todos (" + escapeHtml(catLabel) + ")</option>";
+      const cats = Array.from(new Set(items.map(function (d) { return d.categoria; }).filter(Boolean))).sort();
+      cats.forEach(function (c) {
+        const opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c;
+        catEl.appendChild(opt);
+      });
+      anoEl.innerHTML = "<option value=\"\">Todos os anos</option>";
+      const anos = Array.from(new Set(items.map(function (d) { return d.ano; }).filter(function (a) { return a != null; }))).sort(function (a, b) { return b - a; });
+      anos.forEach(function (a) {
+        const opt = document.createElement("option");
+        opt.value = String(a);
+        opt.textContent = String(a);
+        anoEl.appendChild(opt);
+      });
+    }
+    function renderCards(items) {
+      if (!items.length) {
+        gridEl.innerHTML = "<div class=\"vb-empty\"><p>Nenhuma referência encontrada para os filtros selecionados.</p><button type=\"button\" class=\"vb-btn\" data-vb-reset=\"1\">Limpar filtros</button></div>";
+        return;
+      }
+      const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+      gridEl.innerHTML = items.map(function (item, idx) {
+        const globalIdx = startIndex + idx;
+        const pubHref = safeUrl(item.link_obra);
+        const lattesHref = safeUrl(item.link_lattes);
+        const pubAction = pubHref
+          ? "<a href=\"" + escapeHtml(pubHref) + "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"vb-btn is-primary\">Acessar Texto</a>"
+          : "<span class=\"vb-badge pending\">Texto Indisponível</span>";
+        const lattesAction = lattesHref
+          ? "<a href=\"" + escapeHtml(lattesHref) + "\" target=\"_blank\" rel=\"noopener noreferrer\" class=\"vb-btn\">CV Lattes</a>"
+          : "";
+        const anoBadge = item.ano != null
+          ? "<span class=\"vb-badge green\">" + escapeHtml(item.ano) + "</span>"
+          : "<span class=\"vb-badge pending\">S/D</span>";
+        const veiculoHtml = item.veiculo_ou_ies
+          ? "<div><b>Fonte / Instituição:</b> " + escapeHtml(item.veiculo_ou_ies) + "</div>"
+          : "";
+        return "<article class=\"vb-card\">"
+          + "<div class=\"vb-badges\">" + anoBadge + "<span class=\"vb-badge\">" + escapeHtml(item.categoria || "Publicação") + "</span></div>"
+          + "<h3 class=\"vb-card-title\">" + escapeHtml(item.titulo || item.citacao_original) + "</h3>"
+          + "<div class=\"vb-meta\">"
+          + "<div><b>Autor(a):</b> " + escapeHtml(item.autor || "Não informado") + "</div>"
+          + veiculoHtml
+          + "</div>"
+          + "<div class=\"vb-card-footer\">"
+          + pubAction
+          + "<div class=\"vb-card-actions\">"
+          + "<button type=\"button\" class=\"vb-btn\" data-copy-idx=\"" + globalIdx + "\">Copiar citação</button>"
+          + lattesAction
+          + "</div>"
+          + "</div>"
+          + "</article>";
+      }).join("");
+    }
+    function renderPagination(totalPages) {
+      if (totalPages <= 1) {
+        pagEl.innerHTML = "";
+        return;
+      }
+      const parts = [];
+      parts.push("<button type=\"button\" class=\"vb-page-btn\" data-page=\"" + (currentPage - 1) + "\" " + (currentPage === 1 ? "disabled" : "") + ">&laquo; Anterior</button>");
+      const win = 2;
+      for (let p = 1; p <= totalPages; p += 1) {
+        if (p === 1 || p === totalPages || (p >= currentPage - win && p <= currentPage + win)) {
+          parts.push("<button type=\"button\" class=\"vb-page-btn " + (p === currentPage ? "is-active" : "") + "\" data-page=\"" + p + "\" " + (p === currentPage ? "aria-current=\"page\"" : "") + ">" + p + "</button>");
+        } else if (p === currentPage - win - 1 || p === currentPage + win + 1) {
+          parts.push("<span class=\"vb-pagination-ellipsis\">...</span>");
+        }
+      }
+      parts.push("<button type=\"button\" class=\"vb-page-btn\" data-page=\"" + (currentPage + 1) + "\" " + (currentPage === totalPages ? "disabled" : "") + ">Próxima &raquo;</button>");
+      pagEl.innerHTML = parts.join("");
+    }
+    function render() {
+      const total = filteredData.length;
+      const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
+      if (currentPage > totalPages && totalPages > 0) currentPage = 1;
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const slice = filteredData.slice(start, start + ITEMS_PER_PAGE);
+      statsEl.innerHTML = "Exibindo <strong>" + slice.length + "</strong> de <strong>" + total + "</strong> referências encontradas.";
+      renderCards(slice);
+      renderPagination(totalPages);
+    }
+    function applyFilters() {
+      const q = normalizeText(searchEl.value);
+      const cat = catEl.value;
+      const ano = anoEl.value;
+      const onlyAvail = onlyAvailEl ? onlyAvailEl.checked : false;
+      filteredData = allData.filter(function (item) {
+        if (cat && item.categoria !== cat) return false;
+        if (ano && String(item.ano) !== ano) return false;
+        if (onlyAvail && !safeUrl(item.link_obra)) return false;
+        if (q) {
+          const hay = item.texto_busca || normalizeText((item.titulo || "") + " " + (item.autor || "") + " " + (item.veiculo_ou_ies || "") + " " + (item.citacao_original || ""));
+          if (!hay.includes(q)) return false;
+        }
+        return true;
+      });
+      currentPage = 1;
+      render();
+    }
+    function resetFilters() {
+      searchEl.value = "";
+      catEl.value = "";
+      anoEl.value = "";
+      if (onlyAvailEl) onlyAvailEl.checked = false;
+      applyFilters();
+    }
+    function loadData() {
+      const url = syncHeaderConfig();
+      if (!url) {
+        statsEl.textContent = "URL da base bibliográfica não configurada.";
+        gridEl.innerHTML = "<div class=\"vb-empty\"><p>Configure o atributo data-json-url no container.</p></div>";
+        return;
+      }
+      statsEl.textContent = "Carregando acervo...";
+      fetch(url)
+        .then(function (resp) {
+          if (!resp.ok) throw new Error("HTTP " + resp.status);
+          return resp.json();
+        })
+        .then(function (payload) {
+          rawPayload = payload;
+          const list = Array.isArray(payload) ? payload : (payload && Array.isArray(payload.registros) ? payload.registros : []);
+          if (!rootEl.getAttribute("data-titulo") && payload && payload.titulo && titleEl) {
+            titleEl.textContent = payload.titulo;
+          }
+          allData = list.slice().sort(function (a, b) {
+            return (b.ano || 0) - (a.ano || 0) || String(a.titulo || "").localeCompare(String(b.titulo || ""));
+          });
+          filteredData = allData.slice();
+          populateFilters(allData);
+          render();
+        })
+        .catch(function (err) {
+          console.error(err);
+          statsEl.textContent = "Não foi possível carregar a base de referências.";
+          gridEl.innerHTML = "<div class=\"vb-empty\"><p>Falha de rede ao carregar o acervo. Tente novamente em instantes.</p><button type=\"button\" class=\"vb-btn\" data-vb-retry=\"1\">Tentar novamente</button></div>";
+        });
+    }
+    searchEl.addEventListener("input", function () {
+      window.clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(applyFilters, 180);
+    });
+    catEl.addEventListener("change", applyFilters);
+    anoEl.addEventListener("change", applyFilters);
+    if (onlyAvailEl) onlyAvailEl.addEventListener("change", applyFilters);
+    if (clearEl) clearEl.addEventListener("click", resetFilters);
+    if (pagEl) {
+      pagEl.addEventListener("click", function (e) {
+        const btn = e.target.closest("button[data-page]");
+        if (!btn || btn.disabled) return;
+        currentPage = Number(btn.getAttribute("data-page")) || 1;
+        render();
+        rootEl.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+    gridEl.addEventListener("click", function (e) {
+      const resetBtn = e.target.closest("button[data-vb-reset]");
+      if (resetBtn) {
+        resetFilters();
+        return;
+      }
+      const retryBtn = e.target.closest("button[data-vb-retry]");
+      if (retryBtn) {
+        loadData();
+        return;
+      }
+      const copyBtn = e.target.closest("button[data-copy-idx]");
+      if (!copyBtn) return;
+      const item = filteredData[Number(copyBtn.getAttribute("data-copy-idx"))];
+      if (!item) return;
+      const citacao = item.citacao_original || (String(item.autor || "") + ". " + String(item.titulo || "") + ".");
+      const markCopied = function () {
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = "Copiado!";
+        copyBtn.classList.add("is-copied");
+        announce("Citação copiada para a área de transferência.");
+        window.setTimeout(function () {
+          copyBtn.textContent = orig;
+          copyBtn.classList.remove("is-copied");
+        }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(citacao).then(markCopied).catch(function () {
+          markCopied();
+        });
+      } else {
+        markCopied();
+      }
+    });
+    if (downloadJsonEl) {
+      downloadJsonEl.addEventListener("click", function (e) {
+        if (!rawPayload) return;
+        e.preventDefault();
+        const blob = new Blob([JSON.stringify(rawPayload, null, 2)], { type: "application/json;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = (rawPayload.lista_id || "vitrine-bibliografica") + ".json";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+    if (downloadCsvEl) {
+      downloadCsvEl.addEventListener("click", function () {
+        if (!filteredData.length) return;
+        const headers = ["id", "autor", "titulo", "ano", "categoria", "veiculo_ou_ies", "link_obra", "link_lattes"];
+        const rows = [headers.join(";")].concat(
+          filteredData.map(function (r) {
+            return headers.map(function (h) { return escapeCsvCell(r[h]); }).join(";");
+          })
+        );
+        const blob = new Blob(["\uFEFF" + rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "referencias-" + filteredData.length + ".csv";
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+    }
+    rootEl.__vbReload = function () {
+      allData = [];
+      filteredData = [];
+      currentPage = 1;
+      loadData();
+    };
+    loadData();
+  }
+  const container = document.getElementById("vitrine-bib");
+  if (container) {
+    initVitrine(container);
+  }
+})();
+</script>
+</section>
