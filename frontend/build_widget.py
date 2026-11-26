@@ -47,7 +47,7 @@ def build_widget_html(index_html: str, css_text: str, js_text: str) -> str:
 
 def build_loader_html(widget_url: str = DEFAULT_WIDGET_URL, json_url: str = DEFAULT_JSON_URL) -> str:
     return _strip_blank_lines(
-        f'<div id="vitrine-bib-loader" data-widget-url="{widget_url}" data-json-url="{json_url}" data-titulo="Teses e Dissertações" data-categoria-label="Grau">Carregando acervo bibliográfico...</div>\n'
+        f'<div id="vitrine-bib-loader" data-widget-url="{widget_url}" data-mostrar-seletor="true" data-json-url="{json_url}" data-titulo="Teses e Dissertações" data-categoria-label="Grau">Carregando acervo bibliográfico...</div>\n'
         '<script>\n(function () {\n'
         '  var host = document.getElementById("vitrine-bib-loader");\n  if (!host) return;\n'
         '  fetch(host.getAttribute("data-widget-url"))\n'
@@ -55,7 +55,7 @@ def build_loader_html(widget_url: str = DEFAULT_WIDGET_URL, json_url: str = DEFA
         '    .then(function (html) {\n'
         '      var tpl = document.createElement("template");\n      tpl.innerHTML = html.trim();\n'
         '      var sec = tpl.content.querySelector("#vitrine-bib");\n      if (!sec) throw new Error("Widget inválido");\n'
-        '      ["data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (a) {\n'
+        '      ["data-mostrar-seletor", "data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (a) {\n'
         '        var v = host.getAttribute(a);\n        if (v) sec.setAttribute(a, v);\n      });\n'
         '      var scripts = Array.from(sec.querySelectorAll("script"));\n      scripts.forEach(function (s) { s.remove(); });\n'
         '      host.replaceWith(sec);\n'

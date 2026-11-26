@@ -43,6 +43,36 @@
   outline-offset: 2px;
   border-radius: 10px;
 }
+#vitrine-bib .vb-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+#vitrine-bib .vb-tabs[hidden] {
+  display: none;
+}
+#vitrine-bib .vb-tab {
+  border: 1px solid var(--vb-border-strong);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--vb-primary);
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+  min-height: 38px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+#vitrine-bib .vb-tab:hover {
+  background: var(--vb-primary-soft);
+}
+#vitrine-bib .vb-tab[aria-pressed="true"] {
+  background: var(--vb-primary);
+  color: #ffffff;
+  border-color: var(--vb-primary);
+}
 #vitrine-bib .vb-header {
   display: flex;
   flex-wrap: wrap;

@@ -13,29 +13,6 @@
       font-family: "Open Sans", "Segoe UI", Arial, sans-serif;
       color: #111827;
     }
-    .preview-switcher {
-      max-width: 1120px;
-      margin: 0 auto 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-    .preview-switcher button {
-      border: 1px solid #c2c8ff;
-      border-radius: 999px;
-      background: #ffffff;
-      color: #3b47e5;
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .preview-switcher button[aria-pressed="true"] {
-      background: #3b47e5;
-      color: #ffffff;
-      border-color: #3b47e5;
-    }
     .preview-wrap {
       max-width: 1120px;
       margin: 0 auto;
@@ -43,20 +20,20 @@
   </style>
 </head>
 <body>
-  <div class="preview-switcher" role="navigation" aria-label="Selecionar coleção">
-    <strong>Acervo:</strong>
-    <button type="button" data-switch-lista="teses" aria-pressed="true">Teses e Dissertações</button>
-    <button type="button" data-switch-lista="producao" aria-pressed="false">Produção Acadêmica</button>
-    <button type="button" data-switch-lista="oficiais" aria-pressed="false">Documentos Oficiais</button>
-  </div>
   <main class="preview-wrap">
     <section
       id="vitrine-bib"
+      data-mostrar-seletor="true"
       data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json"
       data-json-url-local="public/teses-dissertacoes.json"
       data-titulo="Teses e Dissertações"
       data-categoria-label="Grau"
     >
+      <div id="vb-tabs" class="vb-tabs" role="tablist" aria-label="Selecionar coleção">
+        <button type="button" class="vb-tab" data-vb-lista="teses-dissertacoes" data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json" data-json-url-local="public/teses-dissertacoes.json" data-titulo="Teses e Dissertações" data-categoria-label="Grau" aria-pressed="true">Teses e Dissertações</button>
+        <button type="button" class="vb-tab" data-vb-lista="producao-academica" data-json-url="https://regi-lpf.github.io/references-parser/public/producao-academica.json" data-json-url-local="public/producao-academica.json" data-titulo="Produção Acadêmica" data-categoria-label="Tipo" aria-pressed="false">Produção Acadêmica</button>
+        <button type="button" class="vb-tab" data-vb-lista="documentos-oficiais" data-json-url="https://regi-lpf.github.io/references-parser/public/documentos-oficiais.json" data-json-url-local="public/documentos-oficiais.json" data-titulo="Documentos Oficiais e Legislação" data-categoria-label="Tipo" aria-pressed="false">Documentos Oficiais</button>
+      </div>
       <div class="vb-header">
         <h2 id="vb-title" class="vb-title">Teses e Dissertações</h2>
         <div class="vb-toolbar-actions">
@@ -95,47 +72,5 @@
     </section>
   </main>
   <script src="frontend/app.js"></script>
-  <script>
-    (function () {
-      var presets = {
-        teses: {
-          prod: "https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json",
-          local: "public/teses-dissertacoes.json",
-          titulo: "Teses e Dissertações",
-          cat: "Grau"
-        },
-        producao: {
-          prod: "https://regi-lpf.github.io/references-parser/public/producao-academica.json",
-          local: "public/producao-academica.json",
-          titulo: "Produção Acadêmica",
-          cat: "Tipo"
-        },
-        oficiais: {
-          prod: "https://regi-lpf.github.io/references-parser/public/documentos-oficiais.json",
-          local: "public/documentos-oficiais.json",
-          titulo: "Documentos Oficiais e Legislação",
-          cat: "Tipo"
-        }
-      };
-      var nav = document.querySelector(".preview-switcher");
-      var vitrine = document.getElementById("vitrine-bib");
-      if (!nav || !vitrine) return;
-      nav.addEventListener("click", function (e) {
-        var btn = e.target.closest("button[data-switch-lista]");
-        if (!btn) return;
-        var key = btn.getAttribute("data-switch-lista");
-        var cfg = presets[key];
-        if (!cfg) return;
-        nav.querySelectorAll("button").forEach(function (b) {
-          b.setAttribute("aria-pressed", b === btn ? "true" : "false");
-        });
-        vitrine.setAttribute("data-json-url", cfg.prod);
-        vitrine.setAttribute("data-json-url-local", cfg.local);
-        vitrine.setAttribute("data-titulo", cfg.titulo);
-        vitrine.setAttribute("data-categoria-label", cfg.cat);
-        if (typeof vitrine.__vbReload === "function") vitrine.__vbReload();
-      });
-    })();
-  </script>
 </body>
 </html>

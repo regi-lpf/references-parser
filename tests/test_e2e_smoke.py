@@ -103,6 +103,35 @@ class TestE2ESmoke(unittest.TestCase):
         (tmp_dir / "public" / "teses-dissertacoes.json").write_text(
             json.dumps(fixture, ensure_ascii=False), encoding="utf-8"
         )
+        prod_fixture = VitrineOutput.model_validate({
+            "schema_version": "1.0",
+            "lista_id": "producao-academica",
+            "titulo": "Produção Acadêmica",
+            "categoria_label": "Tipo",
+            "gerado_em": "2026-11-26T00:00:00+00:00",
+            "total": 1,
+            "registros": [
+                {
+                    "id": "ref_0001",
+                    "chave_dedup": "4444444444444444",
+                    "autor": "Autor Artigo",
+                    "autor_citacao": "AUTOR, A.",
+                    "titulo": "Artigo Exemplo de Produção Acadêmica",
+                    "ano": 2023,
+                    "categoria": "Artigo",
+                    "veiculo_ou_ies": "Revista EPT",
+                    "citacao_original": "AUTOR, A. Artigo Exemplo de Produção Acadêmica. Revista EPT, 2023.",
+                    "link_obra": "https://doi.org/10.1000/exemplo",
+                    "link_lattes": None,
+                    "parse_stage": "abnt",
+                    "link_source": "html",
+                    "curado_humano": False,
+                }
+            ],
+        }).model_dump()
+        (tmp_dir / "public" / "producao-academica.json").write_text(
+            json.dumps(prod_fixture, ensure_ascii=False), encoding="utf-8"
+        )
 
         # Página host simulando o snippet loader-elementor.html apontando para widget-elementor.html local
         loader_raw = (ROOT_DIR / "public" / "loader-elementor.html").read_text(encoding="utf-8")
@@ -199,6 +228,14 @@ class TestE2ESmoke(unittest.TestCase):
                         self._exercitar_pagina(page, f"{base_url}/index.html", "Teses e Dissertações")
                         page2 = context.new_page()
                         self._exercitar_pagina(page2, f"{base_url}/host-loader.html", "Acervo Via Loader")
+                        # Troca de lista via seletor embutido no widget carregado pelo loader
+                        page2.click('#vb-tabs button[data-vb-lista="producao-academica"]')
+                        page2.wait_for_function(
+                            "() => document.querySelector('#vitrine-bib .vb-card-title')?.textContent?.includes('Artigo Exemplo')"
+                        )
+                        self.assertEqual(page2.locator("#vb-title").text_content().strip(), "Produção Acadêmica")
+                        self.assertEqual(page2.locator("#vb-categoria-label").text_content().strip(), "Tipo")
+                        self.assertEqual(page2.locator("#vitrine-bib .vb-card").count(), 1)
                     finally:
                         browser.close()
             finally:
