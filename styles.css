@@ -430,3 +430,17 @@
       animation: none !important;
     }
   }
+
+  #leme-painel-ept .leme-toolbar-actions,
+  #leme-painel-ept .leme-card-secondary-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  #leme-painel-ept .leme-export-btn.is-copied {
+    background: var(--leme-green-soft);
+    color: var(--leme-green-text);
+    border-color: #bbf7d0;
+  }

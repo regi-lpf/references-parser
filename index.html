@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js"></script>
 <div id="leme-painel-ept">
   <!-- Busca -->
   <div class="leme-search-row">
@@ -31,9 +32,22 @@
     </label>
   </div>
 
-  <!-- Contador de Resultados -->
+  <!-- Contador de Resultados + Download da Base -->
   <div class="leme-toolbar">
     <div id="leme-stats" class="leme-count" aria-live="polite">Carregando acervo...</div>
+    <div class="leme-toolbar-actions">
+      <a
+        href="https://raw.githubusercontent.com/regi-lpf/references-parser/refs/heads/main/referencias.json"
+        download="referencias-leme.json"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="leme-link leme-export-btn"
+        title="Baixar base completa em JSON"
+      >Baixar JSON</a>
+      <button type="button" id="leme-download-csv" class="leme-export-btn" title="Exportar base atual em CSV">
+        Baixar CSV
+      </button>
+    </div>
   </div>
 
   <!-- Grade de Cards -->
@@ -43,11 +57,10 @@
   <nav id="leme-pagination" class="leme-pagination" aria-label="Paginação"></nav>
 </div>
 
-
 <script>
 (function () {
   const DATA_URL = "https://raw.githubusercontent.com/regi-lpf/references-parser/refs/heads/main/referencias.json";
-  const ITEMS_PER_PAGE = 12;
+  const ITEMS_PER_PAGE = 20;
 
   let allData = [];
   let filteredData = [];
@@ -62,6 +75,7 @@
   const anoEl = document.getElementById("leme-filter-ano");
   const onlyAvailEl = document.getElementById("leme-only-available");
   const clearEl = document.getElementById("leme-clear");
+  const downloadCsvBtn = document.getElementById("leme-download-csv");
 
   function normalizeText(str) {
     return (str || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -74,8 +88,23 @@
   }
 
   function buildLattesSearchUrl(autor) {
-    const query = encodeURIComponent(`site:lattes.cnpq.br "${autor}"`);
-    return `https://www.google.com/search?q=${query}`;
+  const payload = JSON.stringify({
+    modoBusca: "NOME",
+    keyword: autor,
+    orderBy: "nome"
+  });
+
+  const compressedQ = LZString.compressToEncodedURIComponent(payload);
+  const keywordEncoded = encodeURIComponent(autor);
+
+  return `https://busca-cv-lattes.cnpq.br/busca?keyword=${keywordEncoded}&mode=NOME&q=${encodeURIComponent(compressedQ)}&page=1&size=10`;
+  }
+
+  function formatAbntCitation(item) {
+    const autor = (item.autor_citacao || item.autor || "").toUpperCase();
+    const tipo = (item.grau || "").toLowerCase().includes("doutorado") ? "Tese" : "Dissertação";
+    const acesso = item.url_publicacao ? ` Disponível em: ${item.url_publicacao}.` : "";
+    return `${autor}. ${item.titulo}. ${item.ano}. ${tipo} (${item.grau}) – ${item.ies}, ${item.ano}.${acesso}`;
   }
 
   function populateFilters(data) {
@@ -124,13 +153,14 @@
     }
 
     gridEl.innerHTML = items
-      .map((item) => {
+      .map((item, idx) => {
         const pubBtn = item.url_publicacao
           ? `<a href="${escapeHtml(item.url_publicacao)}" target="_blank" rel="noopener noreferrer" class="leme-link produto">Acessar Texto</a>`
           : `<span class="leme-badge pending" title="Link da publicação ainda não indexado">Texto Indisponível</span>`;
 
         const lattesUrl = item.url_lattes || buildLattesSearchUrl(item.autor);
         const lattesLabel = item.url_lattes ? "CV Lattes" : "Buscar Lattes";
+        const globalIdx = (currentPage - 1) * ITEMS_PER_PAGE + idx;
 
         return `
           <article class="leme-card">
@@ -138,14 +168,19 @@
               <span class="leme-badge green">${escapeHtml(item.ano)}</span>
               <span class="leme-badge">${escapeHtml(item.grau)}</span>
             </div>
-            <h3 class="leme-card-title">${escapeHtml(item.titulo)}</h3>
+            <h3 class="leme-card-title" title="${escapeHtml(item.titulo)}">${escapeHtml(item.titulo)}</h3>
             <div class="leme-meta">
               <div><b>Autor(a):</b> ${escapeHtml(item.autor)}</div>
               <div><b>Instituição:</b> ${escapeHtml(item.ies)}</div>
             </div>
             <div class="leme-card-footer">
               ${pubBtn}
-              <a href="${escapeHtml(lattesUrl)}" target="_blank" rel="noopener noreferrer" class="leme-link leme-export-btn">${lattesLabel}</a>
+              <div class="leme-card-secondary-actions">
+                <button type="button" class="leme-export-btn" data-copy-idx="${globalIdx}" title="Copiar referência formatada">
+                  Copiar Citação
+                </button>
+                <a href="${escapeHtml(lattesUrl)}" target="_blank" rel="noopener noreferrer" class="leme-link leme-export-btn">${lattesLabel}</a>
+              </div>
             </div>
           </article>
         `;
@@ -184,6 +219,46 @@
     renderCards(slice);
     renderPagination(totalPages);
   }
+
+  // Copiar citação via delegação de eventos
+  gridEl.addEventListener("click", async (e) => {
+    const btn = e.target.closest("button[data-copy-idx]");
+    if (!btn) return;
+    const item = filteredData[Number(btn.dataset.copyIdx)];
+    if (!item) return;
+
+    const citacao = formatAbntCitation(item);
+    try {
+      await navigator.clipboard.writeText(citacao);
+      const original = btn.textContent;
+      btn.textContent = "Copiado!";
+      btn.classList.add("is-copied");
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove("is-copied");
+      }, 1800);
+    } catch {
+      window.prompt("Copie a referência abaixo:", citacao);
+    }
+  });
+
+  // Exportar CSV dos resultados filtrados (ou base completa)
+  downloadCsvBtn.addEventListener("click", () => {
+    if (!filteredData.length) return;
+    const headers = ["id", "autor", "titulo", "ano", "grau", "ies", "url_publicacao"];
+    const escapeCsv = (val) => `"${String(val ?? "").replace(/"/g, '""')}"`;
+    const rows = [
+      headers.join(";"),
+      ...filteredData.map((r) => headers.map((h) => escapeCsv(r[h])).join(";"))
+    ];
+    const blob = new Blob(["\uFEFF" + rows.join("\n")], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `referencias-leme-${filteredData.length}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
 
   pagEl.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-page]");

@@ -1,18 +1,16 @@
+import argparse
 import csv
 from difflib import SequenceMatcher
+import html
 import json
 import os
 import re
 import time
 from urllib.parse import quote_plus, urlparse
+from bs4 import BeautifulSoup
 import requests
 
-# Configurações
-INPUT_FILE = "referencias_brutas.txt"
-OUTPUT_JSON = "referencias.json"
-OUTPUT_CSV = "pendencias_revisao.csv"
 BDTD_API = "https://bdtd.ibict.br/vufind/api/v1/search"
-
 PREPOSICOES = {
     "de",
     "da",
@@ -35,47 +33,18 @@ PREPOSICOES = {
 }
 
 
-def carregar_cache_existente(caminho_json: str) -> dict[str, dict]:
-    """Carrega registros já processados em execuções anteriores indexados por ID."""
-    if not os.path.exists(caminho_json):
-        return {}
-    try:
-        with open(caminho_json, "r", encoding="utf-8") as f:
-            dados = json.load(f)
-        return {item["id"]: item for item in dados if "id" in item}
-    except (json.JSONDecodeError, OSError):
-        return {}
-
-
-def formatar_nome_autor(autor_caps: str) -> str:
-    """Converte 'SOBRENOME, NOME DO MEIO' para 'Nome do Meio Sobrenome'."""
-    if "," in autor_caps:
-        sobrenome, prenome = [p.strip() for p in autor_caps.split(",", 1)]
-        nome_completo = f"{prenome} {sobrenome}"
-    else:
-        nome_completo = autor_caps.strip()
-
-    palavras = nome_completo.lower().split()
-    formatadas = [
-        p if (i > 0 and p in PREPOSICOES) else p.capitalize()
-        for i, p in enumerate(palavras)
-    ]
-    return " ".join(formatadas)
-
-
+# ---------------------------------------------------------
+# 1. Camada de Ingestão (Unifica HTML <ul><li> e TXT puro)
+# ---------------------------------------------------------
 def classificar_url(url: str) -> tuple[str | None, str]:
-    """Distingue links profundos (handle, pdf, tede) de homepages genéricas."""
     if not url:
         return None, "ausente"
-
     url = url.strip().rstrip(".,;)")
     parsed = urlparse(url)
     if not parsed.scheme.startswith("http"):
         return None, "invalida"
 
     path = parsed.path.strip("/")
-    query = parsed.query
-
     marcadores_profundos = (
         "handle/",
         "bitstream/",
@@ -86,185 +55,299 @@ def classificar_url(url: str) -> tuple[str | None, str]:
         "sucupira",
         "doi.org",
         "bdtd",
+        "noticia/",
         ".pdf",
     )
     if (
         any(m in url.lower() for m in marcadores_profundos)
         or len(path.split("/")) >= 2
-        or bool(query)
+        or bool(parsed.query)
     ):
         return url, "link_direto_existente"
 
-    if path or (
+    if not path or (
         len(path.split("/")) == 1 and not any(c.isdigit() for c in path)
     ):
-        if not path or (
-            len(path.split("/")) == 1 and not any(c.isdigit() for c in path)
-        ):
-            return None, "rejeitada_homepage"
+        return None, "rejeitada_homepage"
 
     return url, "link_existente_incerto"
 
 
-def extrair_url_da_linha(linha: str) -> tuple[str, str | None, str]:
-    """Remove qualquer URL embutida na linha antes do parsing textual e a classifica."""
-    match_url = re.search(r"(https?://[^\s<>\"']+)", linha)
-    if not match_url:
-        return linha, None, "ausente"
+def carregar_entradas_brutas(caminho: str) -> list[dict]:
+    """Lê tanto arquivo .html (extraindo <li> e hrefs) quanto .txt linha a linha."""
+    with open(caminho, "r", encoding="utf-8") as f:
+        conteudo = f.read()
 
-    url_bruta = match_url.group(1)
-    linha_limpa = linha.replace(url_bruta, "").strip()
-    url_valida, status = classificar_url(url_bruta)
-    return linha_limpa, url_valida, status
+    # Detecta se é HTML pela presença de tags <li>
+    if "<li" in conteudo.lower():
+        soup = BeautifulSoup(conteudo, "html.parser")
+        entradas = []
+        for li in soup.find_all("li"):
+            url_pub, url_lattes, status_url = None, None, "ausente"
+            for a in li.find_all("a", href=True):
+                href = a["href"].strip().rstrip(".,;)")
+                if not href.startswith("http"):
+                    continue
+                if (
+                    "lattes.cnpq.br" in href.lower()
+                    or "escavador.com" in href.lower()
+                ):
+                    url_lattes = href
+                elif not url_pub:
+                    url_valida, st = classificar_url(href)
+                    if url_valida:
+                        url_pub, status_url = url_valida, st
+                    elif st == "rejeitada_homepage" and status_url == "ausente":
+                        status_url = st
+
+                if a.get_text(strip=True).lower() in (
+                    "link",
+                    "acesse",
+                    "aqui",
+                ) or a.get_text(strip=True).startswith("http"):
+                    a.decompose()
+
+            texto = html.unescape(li.get_text(" ", strip=True))
+            texto = re.sub(r"\s+", " ", texto).strip()
+            texto = re.sub(
+                r"\s*Disponível em:?\s*\.?$", "", texto, flags=re.IGNORECASE
+            ).strip()
+            if len(texto) >= 20:
+                entradas.append({
+                    "texto": texto,
+                    "url_pub": url_pub,
+                    "url_lattes": url_lattes,
+                    "status_url": status_url,
+                })
+        return entradas
+
+    # Fallback para arquivo TXT puro
+    entradas = []
+    for linha in conteudo.splitlines():
+        linha = linha.strip()
+        if not linha:
+            continue
+        match_url = re.search(r"(https?://[^\s<>\"']+)", linha)
+        url_pub, status_url = None, "ausente"
+        if match_url:
+            url_bruta = match_url.group(1)
+            linha = linha.replace(url_bruta, "").strip()
+            url_pub, status_url = classificar_url(url_bruta)
+        entradas.append({
+            "texto": linha,
+            "url_pub": url_pub,
+            "url_lattes": None,
+            "status_url": status_url,
+        })
+    return entradas
 
 
-def parse_linha_capes(linha: str, idx: int) -> dict | None:
-    linha_sem_url, url_existente, status_url = extrair_url_da_linha(linha)
+# ---------------------------------------------------------
+# 2. Camada de Parsing Unificado (CAPES -> ABNT/APA)
+# ---------------------------------------------------------
+def formatar_nome_autor(autor_caps: str) -> str:
+    if "," in autor_caps:
+        sobrenome, prenome = [p.strip() for p in autor_caps.split(",", 1)]
+        nome_completo = f"{prenome} {sobrenome}"
+    else:
+        nome_completo = autor_caps.strip()
 
-    # Estágio 1: Padrão CAPES (aceita prenome em Title Case e falta de espaço após ponto do autor)
-    padrao_capes = re.compile(
+    palavras = nome_completo.lower().split()
+    return " ".join(
+        p if (i > 0 and p in PREPOSICOES) else p.capitalize()
+        for i, p in enumerate(palavras)
+    )
+
+
+def detectar_tipo(texto: str) -> str:
+    t = texto.lower()
+    if "doutorado" in t or "tese" in t:
+        return "Doutorado"
+    if "mestrado profissional" in t:
+        return "Mestrado Profissional"
+    if "mestrado" in t or "dissertação" in t:
+        return "Mestrado"
+    if " in." in t or " in:" in t or "org." in t:
+        return "Capítulo de Livro"
+    if "relatório" in t or "pós-doutoral" in t:
+        return "Relatório de Pesquisa"
+    if re.search(r"\b(v\.\s*\d+|n\.\s*\d+|doi:|issn)\b", t) or re.search(
+        r"\(\d{4}\)", t
+    ):
+        return "Artigo em Periódico"
+    if re.search(r"\d{2}/\d{2}/\d{4}", t):
+        return "Notícia / Imprensa"
+    return "Produção Bibliográfica"
+
+
+def parse_registro(entrada: dict, ref_id: str) -> dict | None:
+    texto = entrada["texto"]
+
+    # Estágio 1: Padrão Sucupira/CAPES
+    m_capes = re.match(
         r"^(?P<autor>[A-ZÀ-Ÿ][A-ZÀ-Ÿ\s'-]+,\s*[A-Za-zÀ-ÿ\s.'-]+?)\.\s*"
         r"(?P<titulo>.+?)[.'’\"]*\s+"
         r"(?P<data>\d{2}/\d{2}/\d{4})\s+"
         r"(?P<paginas>(?:\d+|undefined))\s*f\.\s+"
         r"(?P<grau_prog>.+?)\s+"
         r"Instituição de Ensino:\s*(?P<ies>.+?)"
-        r"(?:\s+Biblioteca Depositária:\s*(?P<bib>.+?)\.?)?$"
+        r"(?:\s+Biblioteca Depositária:\s*(?P<bib>.+?)\.?)?$",
+        texto,
     )
-
-    m = padrao_capes.match(linha_sem_url)
-    if m:
-        autor_bruto = m.group("autor").strip()
-        titulo = m.group("titulo").strip(" .’'\"")
-        data = m.group("data")
-        ano = int(data.split("/")[-1])
-        grau_prog = m.group("grau_prog").strip()
-        ies_raw = m.group("ies").strip()
-
-        grau = (
-            grau_prog.split(" em ")[0].strip()
-            if " em " in grau_prog
-            else grau_prog
-        )
-        ies = ies_raw.rsplit(",", 1)[0].strip() if "," in ies_raw else ies_raw
-
+    if m_capes:
+        autor_bruto = m_capes.group("autor").strip()
+        grau_prog = m_capes.group("grau_prog").strip()
+        ies_raw = m_capes.group("ies").strip()
         return {
-            "id": f"ref_{idx:04d}",
+            "id": ref_id,
             "autor": formatar_nome_autor(autor_bruto),
             "autor_citacao": autor_bruto,
-            "titulo": titulo,
-            "ano": ano,
-            "data_defesa": data,
-            "grau": grau,
-            "ies": ies,
-            "url_publicacao": url_existente,
-            "origem_url": status_url,
+            "titulo": m_capes.group("titulo").strip(" .’'\""),
+            "ano": int(m_capes.group("data").split("/")[-1]),
+            "grau": (
+                grau_prog.split(" em ")[0].strip()
+                if " em " in grau_prog
+                else grau_prog
+            ),
+            "ies": ies_raw.rsplit(",", 1)[0].strip() if "," in ies_raw else ies_raw,
+            "url_publicacao": entrada["url_pub"],
+            "url_lattes": entrada["url_lattes"],
+            "origem_url": entrada["status_url"],
         }
 
-    # Estágio 2: Fallback para citações em formato ABNT livre
-    padrao_abnt = re.compile(
-        r"^(?P<autor>[A-ZÀ-Ÿ][A-ZÀ-Ÿ\s'-]+,\s*[A-Za-zÀ-ÿ\s.'-]+?)\.\s*"
-        r"(?P<titulo>.+?)\.\s+"
-        r"(?:\d{2}/\d{2}/)?(?P<ano>19\d{2}|20\d{2})\b.*?"
-        r"(?P<grau>Tese|Dissertação|Mestrado|Doutorado)\b",
-        re.IGNORECASE,
+    # Estágio 2: Padrão APA ("Sobrenome, I. (2020). Título. Revista...")
+    m_apa = re.match(
+        r"^(?P<autor>.+?)\s*\((?P<ano>19\d{2}|20\d{2})\)\.\s*(?P<titulo>[^.]+)\.\s*(?P<resto>.*)$",
+        texto,
     )
+    if m_apa:
+        autor_bruto = m_apa.group("autor").strip(" .,")
+        resto = m_apa.group("resto").strip(" .")
+        return {
+            "id": ref_id,
+            "autor": autor_bruto,
+            "autor_citacao": autor_bruto,
+            "titulo": m_apa.group("titulo").strip(),
+            "ano": int(m_apa.group("ano")),
+            "grau": detectar_tipo(texto),
+            "ies": resto[:140] + "..." if len(resto) > 140 else resto,
+            "citacao_completa": texto,
+            "url_publicacao": entrada["url_pub"],
+            "url_lattes": entrada["url_lattes"],
+            "origem_url": entrada["status_url"],
+        }
 
-    m2 = padrao_abnt.match(linha_sem_url)
-    if m2:
-        autor_bruto = m2.group("autor").strip()
-        titulo = m2.group("titulo").strip(" .’'\"")
-        ano = int(m2.group("ano"))
-        grau_raw = m2.group("grau").lower()
-        grau = "Doutorado" if grau_raw in ("tese", "doutorado") else "Mestrado"
+    # Estágio 3: Padrão ABNT / Geral (autores em caixa alta ou institucional + título + ano)
+    anos = re.findall(r"\b(19\d{2}|20\d{2})\b", texto)
+    if anos:
+        ano = int(anos[-1])
+        m_abnt = re.match(
+            r"^(?P<autor>(?:[A-ZÀ-Ÿ][A-Za-zÀ-ÿ'-]+,\s*(?:[A-ZÀ-Ÿ]\.\s*|[A-Za-zÀ-ÿ'-]+\s*)+;?\s*)+)\.\s+"
+            r"(?P<titulo>[^.?!]+[?!]?)\.\s*(?P<resto>.*)$",
+            texto,
+        )
+        if m_abnt:
+            autor_bruto = m_abnt.group("autor").strip(" .;")
+            titulo = m_abnt.group("titulo").strip()
+            resto = m_abnt.group("resto").strip(" .")
+        else:
+            partes = [p.strip() for p in texto.split(". ") if p.strip()]
+            autor_bruto = partes[0] if len(partes) >= 2 else "Autor não identificado"
+            titulo = partes[1] if len(partes) >= 2 else texto
+            resto = ". ".join(partes[2:]) if len(partes) >= 3 else ""
 
         return {
-            "id": f"ref_{idx:04d}",
-            "autor": formatar_nome_autor(autor_bruto),
+            "id": ref_id,
+            "autor": autor_bruto,
             "autor_citacao": autor_bruto,
             "titulo": titulo,
             "ano": ano,
-            "data_defesa": str(ano),
-            "grau": grau,
-            "ies": "Não especificada (ABNT)",
-            "url_publicacao": url_existente,
-            "origem_url": status_url,
+            "grau": detectar_tipo(texto),
+            "ies": resto[:140] + "..." if len(resto) > 140 else resto,
+            "citacao_completa": texto,
+            "url_publicacao": entrada["url_pub"],
+            "url_lattes": entrada["url_lattes"],
+            "origem_url": entrada["status_url"],
         }
 
     return None
 
 
-def similaridade(a: str, b: str) -> float:
-    return SequenceMatcher(None, a.lower().strip(), b.lower().strip()).ratio()
-
-
-def buscar_na_bdtd(titulo: str, ano: int) -> str | None:
-    """Consulta a API pública da BDTD pelo título e valida por similaridade."""
+# ---------------------------------------------------------
+# 3. Enriquecimento BDTD + Execução Incremental
+# ---------------------------------------------------------
+def buscar_na_bdtd(titulo: str) -> str | None:
     params = {
         "lookfor": titulo,
         "type": "Title",
         "limit": 3,
-        "field[]": ["title", "publishDate", "url", "id"],
+        "field[]": ["title", "url", "id"],
     }
     try:
         resp = requests.get(BDTD_API, params=params, timeout=12)
         if resp.status_code != 200:
             return None
-        records = resp.json().get("records", [])
-        for rec in records:
-            rec_title = rec.get("title", "")
-            if similaridade(titulo, rec_title) >= 0.88:
+        for rec in resp.json().get("records", []):
+            sim = SequenceMatcher(
+                None, titulo.lower(), rec.get("title", "").lower()
+            ).ratio()
+            if sim >= 0.88:
                 urls = rec.get("url", [])
                 if isinstance(urls, list) and urls:
                     return urls[0]
                 if isinstance(urls, str) and urls.startswith("http"):
                     return urls
-                rec_id = rec.get("id")
-                if rec_id:
-                    return f"https://bdtd.ibict.br/vufind/Record/{rec_id}"
+                if rec.get("id"):
+                    return f"https://bdtd.ibict.br/vufind/Record/{rec['id']}"
     except requests.RequestException:
         return None
     return None
 
 
 def main():
-    cache = carregar_cache_existente(OUTPUT_JSON)
-    resultados = []
-    anomalias = []
-    pulados = 0
-    novas_consultas_bdtd = 0
+    parser = argparse.ArgumentParser(description="Pipeline unificado de referências LEME")
+    parser.add_argument("-i", "--input", default="referencias_brutas.txt", help="Arquivo .html ou .txt")
+    parser.add_argument("-o", "--output", default="referencias.json", help="JSON de saída")
+    parser.add_argument("-c", "--csv", default="pendencias_revisao.csv", help="CSV de pendências")
+    parser.add_argument("--prefix", default="ref", help="Prefixo dos IDs (ex: ref, prod, art)")
+    parser.add_argument("--skip-bdtd", action="store_true", help="Não consultar API da BDTD")
+    args = parser.parse_args()
 
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        linhas = [l.strip() for l in f if l.strip()]
+    cache = {}
+    if os.path.exists(args.output):
+        with open(args.output, "r", encoding="utf-8") as f:
+            cache = {item["id"]: item for item in json.load(f) if "id" in item}
 
-    print(
-        f"Processando {len(linhas)} linhas (cache carregado: {len(cache)} registros)..."
-    )
+    entradas = carregar_entradas_brutas(args.input)
+    resultados, anomalias = [], []
+    pulados, consultas_bdtd = 0, 0
 
-    for idx, linha in enumerate(linhas, start=1):
-        ref_id = f"ref_{idx:04d}"
-        registro_previo = cache.get(ref_id)
+    for idx, entrada in enumerate(entradas, start=1):
+        ref_id = f"{args.prefix}_{idx:04d}"
+        previo = cache.get(ref_id)
 
-        # Se já existe no JSON e já tem URL verificada, pula sem reprocessar
-        if registro_previo and registro_previo.get("url_publicacao"):
-            resultados.append(registro_previo)
+        if previo and previo.get("url_publicacao"):
+            resultados.append(previo)
             pulados += 1
             continue
 
-        # Caso contrário, faz o parse (ou reaproveita metadados prévios sem link)
-        item = registro_previo if registro_previo else parse_linha_capes(linha, idx)
+        item = previo if previo else parse_registro(entrada, ref_id)
         if not item:
-            anomalias.append({
-                "linha_num": idx,
-                "motivo": "falha_regex",
-                "conteudo": linha,
-            })
+            anomalias.append({"id": ref_id, "conteudo": entrada["texto"]})
             continue
 
-        # Consulta a BDTD apenas se ainda não houver link válido
-        if not item.get("url_publicacao"):
-            url_bdtd = buscar_na_bdtd(item["titulo"], item["ano"])
-            novas_consultas_bdtd += 1
+        # Se a nova entrada HTML trouxe um link que antes não existia no cache
+        if not item.get("url_publicacao") and entrada.get("url_pub"):
+            item["url_publicacao"] = entrada["url_pub"]
+            item["origem_url"] = entrada["status_url"]
+
+        if (
+            not item.get("url_publicacao")
+            and not args.skip_bdtd
+            and item.get("grau") in ("Doutorado", "Mestrado", "Mestrado Profissional")
+        ):
+            url_bdtd = buscar_na_bdtd(item["titulo"])
+            consultas_bdtd += 1
             if url_bdtd:
                 item["url_publicacao"] = url_bdtd
                 item["origem_url"] = "bdtd_api"
@@ -272,32 +355,14 @@ def main():
 
         resultados.append(item)
 
-    # Salva JSON atualizado mantendo a ordem original
-    with open(OUTPUT_JSON, "w", encoding="utf-8") as f:
+    with open(args.output, "w", encoding="utf-8") as f:
         json.dump(resultados, f, ensure_ascii=False, indent=2)
 
-    # Regera CSV apenas com o que ainda está pendente
-    with open(OUTPUT_CSV, "w", encoding="utf-8", newline="") as f:
+    with open(args.csv, "w", encoding="utf-8", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow([
-            "id",
-            "status",
-            "autor",
-            "titulo",
-            "ano",
-            "ies",
-            "busca_rapida_google",
-        ])
+        writer.writerow(["id", "status", "autor", "titulo", "ano", "busca_google"])
         for a in anomalias:
-            writer.writerow([
-                f"linha_{a['linha_num']}",
-                a["motivo"],
-                "",
-                a["conteudo"],
-                "",
-                "",
-                "",
-            ])
+            writer.writerow([a["id"], "falha_parse", "", a["conteudo"], "", ""])
         for r in resultados:
             if not r.get("url_publicacao"):
                 q = quote_plus(f'"{r["titulo"]}" "{r["autor"]}"')
@@ -307,17 +372,11 @@ def main():
                     r["autor"],
                     r["titulo"],
                     r["ano"],
-                    r["ies"],
                     f"https://www.google.com/search?q={q}",
                 ])
 
     total_links = sum(1 for r in resultados if r.get("url_publicacao"))
-    print("\n--- Concluído ---")
-    print(f"Pulados (já tinham link): {pulados}")
-    print(f"Novas consultas BDTD realizadas: {novas_consultas_bdtd}")
-    print(f"Total extraído no JSON: {len(resultados)}/{len(linhas)}")
-    print(f"Total com link de publicação: {total_links}")
-    print(f"Anomalias restantes: {len(anomalias)}")
+    print(f"[{args.input}] Extraídos: {len(resultados)}/{len(entradas)} | Pulados (cache): {pulados} | Novas BDTD: {consultas_bdtd} | Com link: {total_links} | Anomalias: {len(anomalias)}")
 
 
 if __name__ == "__main__":
