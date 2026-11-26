@@ -44,6 +44,7 @@
     if (!rootEl || rootEl.dataset.vbMounted === "1") return;
     rootEl.dataset.vbMounted = "1";
     const titleEl = rootEl.querySelector("#vb-title");
+    const tabsEl = rootEl.querySelector("#vb-tabs");
     const catLabelEl = rootEl.querySelector("#vb-categoria-label");
     const searchEl = rootEl.querySelector("#vb-search");
     const catEl = rootEl.querySelector("#vb-filter-categoria");
@@ -308,6 +309,29 @@
       currentPage = 1;
       loadData();
     };
+    if (tabsEl) {
+      if (rootEl.getAttribute("data-mostrar-seletor") === "false") {
+        tabsEl.hidden = true;
+      } else {
+        tabsEl.hidden = false;
+        tabsEl.addEventListener("click", function (e) {
+          const btn = e.target.closest("button[data-vb-lista]");
+          if (!btn) return;
+          tabsEl.querySelectorAll("button[data-vb-lista]").forEach(function (b) {
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          ["data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (attr) {
+            const val = btn.getAttribute(attr);
+            if (val) rootEl.setAttribute(attr, val);
+          });
+          searchEl.value = "";
+          catEl.value = "";
+          anoEl.value = "";
+          if (onlyAvailEl) onlyAvailEl.checked = false;
+          rootEl.__vbReload();
+        });
+      }
+    }
     loadData();
   }
   const container = document.getElementById("vitrine-bib");

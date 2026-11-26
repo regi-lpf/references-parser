@@ -1,10 +1,16 @@
 <section
       id="vitrine-bib"
+      data-mostrar-seletor="true"
       data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json"
       data-json-url-local="public/teses-dissertacoes.json"
       data-titulo="Teses e Dissertações"
       data-categoria-label="Grau"
     >
+      <div id="vb-tabs" class="vb-tabs" role="tablist" aria-label="Selecionar coleção">
+        <button type="button" class="vb-tab" data-vb-lista="teses-dissertacoes" data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json" data-json-url-local="public/teses-dissertacoes.json" data-titulo="Teses e Dissertações" data-categoria-label="Grau" aria-pressed="true">Teses e Dissertações</button>
+        <button type="button" class="vb-tab" data-vb-lista="producao-academica" data-json-url="https://regi-lpf.github.io/references-parser/public/producao-academica.json" data-json-url-local="public/producao-academica.json" data-titulo="Produção Acadêmica" data-categoria-label="Tipo" aria-pressed="false">Produção Acadêmica</button>
+        <button type="button" class="vb-tab" data-vb-lista="documentos-oficiais" data-json-url="https://regi-lpf.github.io/references-parser/public/documentos-oficiais.json" data-json-url-local="public/documentos-oficiais.json" data-titulo="Documentos Oficiais e Legislação" data-categoria-label="Tipo" aria-pressed="false">Documentos Oficiais</button>
+      </div>
       <div class="vb-header">
         <h2 id="vb-title" class="vb-title">Teses e Dissertações</h2>
         <div class="vb-toolbar-actions">
@@ -85,6 +91,36 @@
   outline: 3px solid rgba(59, 71, 229, 0.45);
   outline-offset: 2px;
   border-radius: 10px;
+}
+#vitrine-bib .vb-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+#vitrine-bib .vb-tabs[hidden] {
+  display: none;
+}
+#vitrine-bib .vb-tab {
+  border: 1px solid var(--vb-border-strong);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--vb-primary);
+  padding: 8px 15px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+  min-height: 38px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+#vitrine-bib .vb-tab:hover {
+  background: var(--vb-primary-soft);
+}
+#vitrine-bib .vb-tab[aria-pressed="true"] {
+  background: var(--vb-primary);
+  color: #ffffff;
+  border-color: var(--vb-primary);
 }
 #vitrine-bib .vb-header {
   display: flex;
@@ -465,6 +501,7 @@
     if (!rootEl || rootEl.dataset.vbMounted === "1") return;
     rootEl.dataset.vbMounted = "1";
     const titleEl = rootEl.querySelector("#vb-title");
+    const tabsEl = rootEl.querySelector("#vb-tabs");
     const catLabelEl = rootEl.querySelector("#vb-categoria-label");
     const searchEl = rootEl.querySelector("#vb-search");
     const catEl = rootEl.querySelector("#vb-filter-categoria");
@@ -729,6 +766,29 @@
       currentPage = 1;
       loadData();
     };
+    if (tabsEl) {
+      if (rootEl.getAttribute("data-mostrar-seletor") === "false") {
+        tabsEl.hidden = true;
+      } else {
+        tabsEl.hidden = false;
+        tabsEl.addEventListener("click", function (e) {
+          const btn = e.target.closest("button[data-vb-lista]");
+          if (!btn) return;
+          tabsEl.querySelectorAll("button[data-vb-lista]").forEach(function (b) {
+            b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+          });
+          ["data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (attr) {
+            const val = btn.getAttribute(attr);
+            if (val) rootEl.setAttribute(attr, val);
+          });
+          searchEl.value = "";
+          catEl.value = "";
+          anoEl.value = "";
+          if (onlyAvailEl) onlyAvailEl.checked = false;
+          rootEl.__vbReload();
+        });
+      }
+    }
     loadData();
   }
   const container = document.getElementById("vitrine-bib");

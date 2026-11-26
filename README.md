@@ -40,4 +40,7 @@ uv run python -m unittest discover -s tests -v
 
 ## Uso no WordPress / Elementor
 
-Cole o conteúdo de `public/loader-elementor.html` em um bloco **HTML** do Elementor e ajuste apenas `data-json-url`, `data-titulo` e `data-categoria-label` por página.
+Cole o conteúdo de `public/loader-elementor.html` em um bloco **HTML** do Elementor:
+
+- **Vitrine completa com seletor de listas (padrão):** use `public/loader-elementor.html` diretamente (`data-mostrar-seletor="true"`).
+- **Lista única sem seletor:** defina `data-mostrar-seletor="false"` e ajuste `data-json-url`, `data-titulo` e `data-categoria-label` para a lista desejada.

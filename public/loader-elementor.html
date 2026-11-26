@@ -1,4 +1,4 @@
-<div id="vitrine-bib-loader" data-widget-url="https://regi-lpf.github.io/references-parser/public/widget-elementor.html" data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json" data-titulo="Teses e Dissertações" data-categoria-label="Grau">Carregando acervo bibliográfico...</div>
+<div id="vitrine-bib-loader" data-widget-url="https://regi-lpf.github.io/references-parser/public/widget-elementor.html" data-mostrar-seletor="true" data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json" data-titulo="Teses e Dissertações" data-categoria-label="Grau">Carregando acervo bibliográfico...</div>
 <script>
 (function () {
   var host = document.getElementById("vitrine-bib-loader");
@@ -10,7 +10,7 @@
       tpl.innerHTML = html.trim();
       var sec = tpl.content.querySelector("#vitrine-bib");
       if (!sec) throw new Error("Widget inválido");
-      ["data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (a) {
+      ["data-mostrar-seletor", "data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (a) {
         var v = host.getAttribute(a);
         if (v) sec.setAttribute(a, v);
       });
