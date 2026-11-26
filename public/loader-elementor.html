@@ -1,0 +1,24 @@
+<div id="vitrine-bib-loader" data-widget-url="https://regi-lpf.github.io/references-parser/public/widget-elementor.html" data-json-url="https://regi-lpf.github.io/references-parser/public/teses-dissertacoes.json" data-titulo="Teses e Dissertações" data-categoria-label="Grau">Carregando acervo bibliográfico...</div>
+<script>
+(function () {
+  var host = document.getElementById("vitrine-bib-loader");
+  if (!host) return;
+  fetch(host.getAttribute("data-widget-url"))
+    .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+    .then(function (html) {
+      var tpl = document.createElement("template");
+      tpl.innerHTML = html.trim();
+      var sec = tpl.content.querySelector("#vitrine-bib");
+      if (!sec) throw new Error("Widget inválido");
+      ["data-json-url", "data-json-url-local", "data-titulo", "data-categoria-label"].forEach(function (a) {
+        var v = host.getAttribute(a);
+        if (v) sec.setAttribute(a, v);
+      });
+      var scripts = Array.from(sec.querySelectorAll("script"));
+      scripts.forEach(function (s) { s.remove(); });
+      host.replaceWith(sec);
+      scripts.forEach(function (orig) { var sc = document.createElement("script"); sc.textContent = orig.textContent; sec.appendChild(sc); });
+    })
+    .catch(function () { host.textContent = "Não foi possível carregar o acervo bibliográfico."; });
+})();
+</script>

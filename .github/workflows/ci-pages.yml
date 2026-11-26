@@ -1,0 +1,80 @@
+name: CI & GitHub Pages
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependências
+        run: uv sync --locked
+
+      - name: Instalar Chromium para smoke E2E
+        run: uv run playwright install chromium --with-deps
+
+      - name: Validar contrato Pydantic dos JSONs publicados
+        run: |
+          uv run python -c '
+          import json, pathlib
+          from vitrine_bib.models import VitrineOutput
+          for p in sorted(pathlib.Path("public").glob("*.json")):
+              VitrineOutput.model_validate(json.loads(p.read_text(encoding="utf-8")))
+              print(f"OK {p}")
+          '
+
+      - name: Validar bundle Elementor (--check)
+        run: uv run python frontend/build_widget.py --check
+
+      - name: Executar testes unitários e smoke E2E
+        env:
+          REQUIRE_SMOKE: "1"
+        run: uv run python -m unittest discover -s tests -v
+
+  deploy:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Montar artefato estático (_site)
+        run: |
+          mkdir -p _site/frontend _site/public
+          cp index.html _site/index.html
+          cp frontend/styles.css frontend/app.js _site/frontend/
+          cp -r public/* _site/public/
+
+      - name: Upload artifact do GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
